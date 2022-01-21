@@ -1,0 +1,22 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 200px;
+}
+.row{
+    display: flex;
+    justify-content: space-evenly;
+}
+.champs{
+    width: 40%;
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction: column;
+}
+.sendForm{
+    width: 150px;
+}
