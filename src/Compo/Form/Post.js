@@ -1,5 +1,5 @@
-import Name from './LastName';
 import Desc from './Description';
+import TextInput from './TextInput';
 import '../../Style/Form.css'
 
 export default function Post(){
@@ -8,14 +8,15 @@ export default function Post(){
         console.log(process.env.REACT_APP_API_URL);
         const value = {
             userID : localStorage.getItem('userID'),
-            name : e.target['lastName'].value,
+            name : e.target['name'].value,
             description: e.target['desc'].value
         }
         fetch(process.env.REACT_APP_API_URL+"post/",{
             method: "POST",
             headers: { 
                 'Accept': 'application/json', 
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+localStorage.getItem('token')
             },
             body: JSON.stringify(value)
         }).then(function(res) {
@@ -31,7 +32,7 @@ export default function Post(){
 
     return(
         <form action="#" onSubmit={handleSubmit}>
-            <Name />
+            <TextInput valueInput="name" nameInput="Nom du post"/>
             <Desc />
             <input type="submit"/>
         </form>

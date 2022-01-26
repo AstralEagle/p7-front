@@ -1,5 +1,6 @@
-import Email from './Email.js';
 import Password from './PassWord.js';
+import TextInput from './TextInput';
+
 import '../../Style/Form.css'
 
 export default function Login(){
@@ -22,10 +23,9 @@ export default function Login(){
                 return res.json();
             }
         }).then(function(value){
-            console.log(value);
             localStorage.setItem('userID', value.userID);
             localStorage.setItem('token', value.token)
-            window.location = "/";
+            window.location = "/message";
         }).catch(function(err){
             console.error(err.message);
         });        
@@ -33,7 +33,7 @@ export default function Login(){
 
     return(
         <form action="#" onSubmit={handleSubmit}>
-            <Email />
+            <TextInput valueInput={"email"} nameInput="Email"/>
             <Password />
             <input type="submit"/>
         </form>
