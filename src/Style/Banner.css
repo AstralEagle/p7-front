@@ -1,3 +1,19 @@
-img{
+.banner{
+    display: flex;
+    justify-content: space-between;
+    background-color: #7c7c7c;
+    padding-left: 50px;
+    padding-right: 50px;
+    align-items: center;
+}
+.banner img{
     width: 150px;
+}
+ul{
+    display: flex;
+}
+li{
+    list-style-type: none;
+    margin-left: 10px;
+    margin-right: 10px;
 }

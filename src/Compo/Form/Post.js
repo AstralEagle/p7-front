@@ -1,11 +1,10 @@
-import Desc from './Description';
+import Desc from './DescInput';
 import TextInput from './TextInput';
 import '../../Style/Form.css'
 
 export default function Post(){
     const handleSubmit = (e)=>{
         e.preventDefault();
-        console.log(process.env.REACT_APP_API_URL);
         const value = {
             userID : localStorage.getItem('userID'),
             name : e.target['name'].value,
@@ -23,8 +22,6 @@ export default function Post(){
             if (res.ok) {
                 return res.json();
             }
-        }).then(function(value){
-            console.log(value);
         }).catch(function(err){
             console.error(err.message);
         });        

@@ -1,7 +1,6 @@
-import Name from './Name.js';
-import LastName from './LastName.js';
-import Email from './Email.js';
-import Password from './PassWord.js';
+import TextInput from './TextInput';
+import EmailInput from './EmailInput';
+import PassInput from './PassInput';
 import '../../Style/Form.css'
 
 
@@ -9,7 +8,6 @@ export default function Signup(){
     
     const handleSubmit = (e)=>{
                 e.preventDefault();
-
         const value = {
             name: e.target['name'].value,
             last_name: e.target['lastName'].value,
@@ -23,11 +21,7 @@ export default function Signup(){
                 'Content-Type': 'application/json' 
             },
             body: JSON.stringify(value)
-        }).then(function(res) {
-            if (res.ok) {
-                return res.json();
-            }
-        }).then(function(val){
+        }).then(() => {
             fetch(process.env.REACT_APP_API_URL+"auth/login",{
                 method: "POST",
                 headers: { 
@@ -40,7 +34,6 @@ export default function Signup(){
                     return res.json();
                 }
             }).then(function(value){
-                console.log(value);
                 localStorage.setItem('userID', value.userID);
                 localStorage.setItem('token', value.token)
                 window.location = "/";
@@ -54,13 +47,13 @@ export default function Signup(){
 
     return(
         <form action="#" onSubmit={handleSubmit}>
-            <Email />
+            <EmailInput />
             <div className="row">
-                <Name />
-                <LastName />
+                <TextInput  valueInput={"name"} nameInput={"Prénom"}/>
+                <TextInput valueInput={"lastName"} nameInput={"Nom"}/>
             </div>
-            <Password />
-            <input type="submit" className="sendForm"/>
+            <PassInput />
+            <input type="submit" className="submitButt"/>
         </form>
     );
 }
