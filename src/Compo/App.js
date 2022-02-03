@@ -4,9 +4,16 @@ import Login from './Form/Log'
 import Post from './Form/Post'
 import Messages from './Post/Messages'
 import Banner from './Banner/Banner'
+import Beta from './Message/HUB'
 import Test from './Test/Test'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { far } from '@fortawesome/free-regular-svg-icons'
+import { faSignOutAlt, faHeart, faTimes} from '@fortawesome/free-solid-svg-icons'
+
+
 
 export default function App() {
+  library.add( far, faSignOutAlt, faHeart, faTimes);
   const [connected, setConnect] = useState(false);
 
   if (
@@ -40,10 +47,11 @@ export default function App() {
         <div>
           <Banner />
           <Routes>
+            <Route exact path="/" element={<Messages />} />
             <Route path="/log" element={<Login />} />
             <Route path="/test" element={<Test />} />
             <Route path="/post" element={<Post />} />
-            <Route exact path="/" element={<Messages />} />
+            <Route path="/beta" element={<Beta />} />
           </Routes>
         </div>
       );
@@ -51,7 +59,7 @@ export default function App() {
   }
   return (
     <div>
-      <Login/>
+      <Login />
     </div>
   )
 }

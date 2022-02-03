@@ -1,8 +1,9 @@
+import React,{useState} from 'react';
 import Desc from './DescInput';
 import TextInput from './TextInput';
-import '../../Style/Form.css'
 
 export default function Post(){
+
     const handleSubmit = (e)=>{
         e.preventDefault();
         const value = {
@@ -28,10 +29,10 @@ export default function Post(){
     }
 
     return(
-        <form action="#" onSubmit={handleSubmit}>
+        <form action="#" onSubmit={handleSubmit} className='postform'>
             <TextInput valueInput="name" nameInput="Nom du post"/>
             <Desc />
-            <input type="submit"/>
+            <input type="submit" className="submitButt"/>
         </form>
     );
 }

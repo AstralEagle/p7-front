@@ -1,7 +1,6 @@
 import TextInput from './TextInput';
 import EmailInput from './EmailInput';
 import PassInput from './PassInput';
-import '../../Style/Form.css'
 
 
 export default function Signup(){
@@ -46,7 +45,7 @@ export default function Signup(){
     }
 
     return(
-        <form action="#" onSubmit={handleSubmit}>
+        <form action="#" onSubmit={handleSubmit} className='formLog'>
             <EmailInput />
             <div className="row">
                 <TextInput  valueInput={"name"} nameInput={"Prénom"}/>

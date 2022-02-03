@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 export default function Post(props){
 
@@ -6,6 +8,8 @@ export default function Post(props){
     const description = props.valuDesc.split('\n');
 
     const [like,setLike] = useState(0);
+    const [isLiked,setIsLike] = useState(false);
+
 
     const getLike = () =>{
         const header ={
@@ -19,7 +23,13 @@ export default function Post(props){
         fetch(process.env.REACT_APP_API_URL+'post/'+props.valuID,header)
             .then((res) => {return res.json()})
             .then((res) => {
-                setLike(res)
+                if(res.isLike){
+                    setIsLike(true);
+                }
+                else{
+                    setIsLike(false);
+                }
+                setLike(res.nbrLike)
             })
             .catch((err) => {console.error(err)});
     }
@@ -50,15 +60,22 @@ export default function Post(props){
               console.error(err)
             });
     }
-    return(
-        <div>
-            <h3 onClick={onClick}>{name}</h3>
-            <div>
-                { description.map(descri =>(
-                    <p>{descri}</p>
-                    ))}
-            </div>
-            <p>{like}</p>
+    return (
+      <div className="message">
+        <h3>{name}</h3>
+        <div className="descPara">
+          {description.map((descri) => (
+            <p className="textPara">{descri}</p>
+          ))}
         </div>
-    )
+        <div className="shareOption">
+          {isLiked ? (
+            <FontAwesomeIcon icon="heart" size="lg" className="inputLiked" onClick={onClick}/>
+          ) : (
+            <FontAwesomeIcon icon={["far", "heart"]} size="lg" className="inputLike" onClick={onClick} />
+          )}
+          <p>{like}</p>
+        </div>
+      </div>
+    );
 }

@@ -1,3 +1,5 @@
+import '../../Style/textInput.css';
+
 export default function Input(props){
 
     return(<div className="champs">

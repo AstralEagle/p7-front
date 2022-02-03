@@ -1,7 +1,7 @@
 import PassInput from './PassInput';
 import EmailInput from './EmailInput';
+import'../../Style/Form.css';
 
-import '../../Style/Form.css'
 
 export default function Login(){
     const handleSubmit = (e)=>{
@@ -32,7 +32,7 @@ export default function Login(){
     }
 
     return(
-        <form action="#" onSubmit={handleSubmit}>
+        <form action="#" onSubmit={handleSubmit} className="formLog">
             <EmailInput />
             <PassInput />
             <input type="submit" className="submitButt"/>

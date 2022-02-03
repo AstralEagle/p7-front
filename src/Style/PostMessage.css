@@ -1,0 +1,47 @@
+.listOfMessage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+}
+.message{
+    min-width: 30%;
+    background-color: rgb(194, 194, 194);
+    border-radius: 15px;
+    border: 1px solid black;
+    padding: 2px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 15px;
+}
+.message h3{
+    text-align: center;
+}
+.descPara{
+
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+textarea{
+    border-radius: 15px;
+    width: 40%;
+    height: 30px;
+    margin: 10px;
+    padding: 10px;
+    overflow: hidden;
+}
+input{
+    border-radius: 15px;
+}
+.shareOption{
+    display: flex;
+    align-items: center;
+}
+.inputLike:hover{
+    color: red;
+}
+.inputLiked{
+    color: red;
+}

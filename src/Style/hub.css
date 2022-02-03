@@ -1,0 +1,4 @@
+.hubMessage{
+    display: flex;
+    flex-direction: row;
+}

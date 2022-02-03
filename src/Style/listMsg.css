@@ -1,0 +1,30 @@
+.sectionMessage{
+    flex : 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+}
+.infoMessage{
+    display: flex;
+    flex-direction: column;
+}
+h2{
+    align-self: center;
+    font-size: 35px;
+    margin-bottom: 50px;
+}
+.scrollMsg{
+    align-items: center;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 550px;
+    overflow-x: scroll;
+    border-radius: 15px;
+}
+.listMsg{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}

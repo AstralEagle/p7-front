@@ -1,4 +1,4 @@
-form{
+.formLog{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -8,29 +8,26 @@ form{
     margin: 200px;
     padding: 40px;
     border-radius: 20px;
-    background: rgb(178, 179, 165);
+    background-color: #FFD7D7;
+}
+.postform{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 10%;
+    padding: 40px;
+    border-radius: 20px;
+    background-color: #FFD7D7;
 }
 .row{
     display: flex;
     justify-content: space-evenly;
 }
-input{
-    border-radius: 15px;
-}
-.champs{
-    width: 100%;
-    display: flex;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    flex-direction: column;
-}
-.champs input{
-    width: 100%;
-    height: 20px;
-    align-self: center;
-    text-align: center;
-}
+
 .submitButt{
     height: 50px;
+    border-radius: 15px;
 }
