@@ -34,7 +34,6 @@ export default function Channel({chanId,setSelect}){
   }, []);
 
   const onClick = (e) => {
-    console.log("Channel clicked")
     setSelect(channel);
   };
 

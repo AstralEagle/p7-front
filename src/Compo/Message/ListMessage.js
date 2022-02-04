@@ -5,15 +5,17 @@ import '../../Style/listMsg.css'
 
 export default function Listmessages({channel}) {
   const [messages, setMessages] = useState([]);
+  const replyMsg = null;
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
     console.log("scroll to bottom");
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
+  const getTest = ()=>{
+    console.log("getTest");
+  }
   const getMessages = () => {
-
     const header = {
       method: "GET",
       headers: {
@@ -24,7 +26,7 @@ export default function Listmessages({channel}) {
           localStorage.getItem("token") +
           " " +
           localStorage.getItem("userID"),
-      }
+      },
     };
 
     console.log("Requesting messages ", channel.id);
@@ -49,8 +51,7 @@ export default function Listmessages({channel}) {
           }
           setMessages(tableau);
           scrollToBottom();
-        }
-        else{
+        } else {
           setMessages([]);
         }
       })
@@ -61,21 +62,18 @@ export default function Listmessages({channel}) {
 
   useEffect(() => {
     getMessages();
-  },[channel])
-
+  }, [channel]);
 
   return (
     <div className="sectionMessage">
-      <Post channel={channel} postMessage={getMessages} />
+      <Post channel={channel} postMessage={getMessages} reply={replyMsg} />
       <div className="infoMessage">
         <h2 onClick={scrollToBottom}>{channel.name}</h2>
         <div className="scrollMsg">
           <div ref={messagesEndRef} />
           <div className="listMsg">
             {messages.map((message) => (
-              <Message
-                messages={message}
-                key={"message" + message[1][0].id}
+              <Message messages={message} postMessage={getTest} replyMsg={replyMsg} key={"message" + message[1][0].id}
               />
             ))}
           </div>

@@ -1,6 +1,6 @@
 import '../../Style/PostMessage.css'
 
-export default function PostMessage({channel,postMessage}){
+export default function PostMessage({channel,postMessage,reply,setReply}){
 
     const onSubmit = (e)=>{
         e.preventDefault();
@@ -33,7 +33,8 @@ export default function PostMessage({channel,postMessage}){
     }
     return (
       <form action="#" onSubmit={onSubmit} className="postMessage">
-        <textarea type="text" name="message"></textarea>
+          <p>{reply !==null ? reply.id: "test"}</p>
+        <input type="text" name="message" className="messageInput" />
         <input type="submit" />
       </form>
     );

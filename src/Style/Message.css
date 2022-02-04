@@ -15,14 +15,19 @@
 }
 .msgItem p{
     margin: 0px;
+    flex: 1;
 }
 .moreOption{
     opacity: 0;
     font-size: 20px;
+    height: 20px; 
 }
 .msgItem:hover{
     background-color: rgb(204, 201, 201);
 }
 .msgItem:hover .moreOption{
     opacity: 1;
+}
+.iconItem{    
+    font-size: 20px;
 }
