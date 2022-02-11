@@ -5,6 +5,9 @@ import Post from './Form/Post'
 import Messages from './Post/Messages'
 import Banner from './Banner/Banner'
 import Beta from './Message/HUB'
+import SettingsChan from './SettingsChannel/Index'
+import AddAcces from './SettingsChannel/AddAcces'
+import Admin from './Admin/MessageReport'
 import Test from './Test/Test'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { far } from '@fortawesome/free-regular-svg-icons'
@@ -52,6 +55,9 @@ export default function App() {
             <Route path="/test" element={<Test />} />
             <Route path="/post" element={<Post />} />
             <Route path="/beta" element={<Beta />} />
+            <Route path="/channel/:idChan" element={<SettingsChan />} />            
+            <Route path="/join/:id" element={<AddAcces />} />   
+            <Route path="/admin" element={<Admin />} />         
           </Routes>
         </div>
       );

@@ -5,16 +5,14 @@ import '../../Style/listMsg.css'
 
 export default function Listmessages({channel}) {
   const [messages, setMessages] = useState([]);
-  const replyMsg = null;
+  const [replyMsg,setReplyMsg] = useState(null)
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
     console.log("scroll to bottom");
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-  const getTest = ()=>{
-    console.log("getTest");
-  }
+ 
   const getMessages = () => {
     const header = {
       method: "GET",
@@ -28,8 +26,6 @@ export default function Listmessages({channel}) {
           localStorage.getItem("userID"),
       },
     };
-
-    console.log("Requesting messages ", channel.id);
     fetch(
       process.env.REACT_APP_API_URL + "message/" + channel.id + "/channel",
       header
@@ -39,13 +35,15 @@ export default function Listmessages({channel}) {
       })
       .then((res) => {
         if (res.length > 0) {
-          const tableau = [[res[0].id_user, []]];
+          console.log(res)
+          const tableau = [[{id:res[0].id_user,name: res[0].user_name,lastName: res[0].user_last_name}, []]];
+          console.log(tableau)
           let compteur = 0;
           for (let val of res) {
-            if (tableau[compteur][0] === val.id_user) {
+            if (tableau[compteur][0].id === val.id_user) {
               tableau[compteur][1].push(val);
             } else {
-              tableau.push([val.id_user, [val]]);
+              tableau.push([{id:val.id_user,name: val.user_name,lastName: val.user_last_name}, [val]]);
               compteur++;
             }
           }
@@ -66,16 +64,16 @@ export default function Listmessages({channel}) {
 
   return (
     <div className="sectionMessage">
-      <Post channel={channel} postMessage={getMessages} reply={replyMsg} />
+      <Post channel={channel} postMessage={getMessages} reply={replyMsg} setReply={setReplyMsg}/>
       <div className="infoMessage">
         <h2 onClick={scrollToBottom}>{channel.name}</h2>
         <div className="scrollMsg">
-          <div ref={messagesEndRef} />
           <div className="listMsg">
             {messages.map((message) => (
-              <Message messages={message} postMessage={getTest} replyMsg={replyMsg} key={"message" + message[1][0].id}
+              <Message scrollBootom={scrollToBottom} messages={message} postMessage={getMessages} replyMsg={setReplyMsg} key={"messageByUser" + message[1][0].id}
               />
-            ))}
+              ))}
+              <div ref={messagesEndRef} />
           </div>
         </div>
       </div>

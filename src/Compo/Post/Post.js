@@ -65,7 +65,7 @@ export default function Post(props){
         <h3>{name}</h3>
         <div className="descPara">
           {description.map((descri) => (
-            <p className="textPara">{descri}</p>
+            <p className="textPara" key={descri+props.valuID}>{descri}</p>
           ))}
         </div>
         <div className="shareOption">

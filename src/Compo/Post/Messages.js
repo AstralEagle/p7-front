@@ -21,7 +21,7 @@ export default function Messages(){
     return(
         <div className="listOfMessage">
             {data.map(value =>(
-                <Post valuName={value.name} valuDesc={value.description} valuID={value.id} />
+                <Post valuName={value.name} valuDesc={value.description} valuID={value.id} key={value.id+"POST"} />
             ))}
         </div>
     )

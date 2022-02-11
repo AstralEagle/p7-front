@@ -1,4 +1,5 @@
 .itemChannel{
+    position: relative;
     width:50px;
     height:50px;
     background-color: rgb(184, 151, 151);
@@ -6,4 +7,23 @@
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.itemChannel p {
+    font-size: 20px;
+}
+.addChannel{
+    font-size: 40px;
+}
+.settingsChannel{
+    opacity: 0;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 20px;
+}
+.itemChannel:hover .settingsChannel{
+    opacity : 1;
 }

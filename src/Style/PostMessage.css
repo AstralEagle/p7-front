@@ -17,10 +17,16 @@
     text-align: center;
 }
 
-form{
+.postMessage{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #f3f3f3;
 }
 .messageInput{
     border-radius: 15px;
@@ -29,6 +35,17 @@ form{
     margin: 10px;
     padding: 10px;
     overflow: hidden;
+}
+.replyMsg{
+     height:20px
+}
+.replyMsg div{
+    display: flex;
+    align-items: center;
+}
+.removeReply{
+    font-size:20px;
+    margin-left: 20px;
 }
 input{
     border-radius: 15px;

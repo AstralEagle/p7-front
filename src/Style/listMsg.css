@@ -18,11 +18,13 @@ h2{
     align-items: center;
     display: flex;
     flex-direction: column-reverse;
-    height: 550px;
+    margin-bottom: 150px;
+    height: 590px;
     overflow-x: scroll;
     border-radius: 15px;
 }
 .listMsg{
+    padding-top:500px;
     width: 100%;
 
     display: flex;

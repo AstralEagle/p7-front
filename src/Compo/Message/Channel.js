@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import {IoMdAdd,IoMdSettings} from 'react-icons/io'
 import '../../Style/Channel.css';
 
 
-export default function Channel({chanId,setSelect}){
+export default function Channel({accesChan,setSelect}){
   const [channel, setChannel] = useState({});
 
   const requestChannel = () => {
@@ -18,11 +19,12 @@ export default function Channel({chanId,setSelect}){
           localStorage.getItem("userID"),
       },
     };
-    fetch(process.env.REACT_APP_API_URL + "channel/" + chanId, header)
+    fetch(process.env.REACT_APP_API_URL + "channel/" + accesChan.id_channel, header)
       .then((res) => {
         return res.json();
       })
       .then((res) => {
+        res.initial = res.name.substring(0,1);
         setChannel(res);
       })
       .catch((err) => {
@@ -30,16 +32,39 @@ export default function Channel({chanId,setSelect}){
       });
   };
   useEffect(() => {
+    if(accesChan !== 0)
     requestChannel();
+
   }, []);
 
+  if(accesChan === 0){
+    const onClickAdd = (e) => {
+      setSelect({
+        name: "Create Channel",
+        id : 0
+      })
+    }
+
+    return(
+      <div className="itemChannel" onClick={onClickAdd}>
+      <IoMdAdd className="addChannel"/>
+    </div>
+    )
+  }
   const onClick = (e) => {
-    setSelect(channel);
-  };
+    setSelect(channel)
+  }
+  const toSettings = (e) => {
+    window.location = "/channel/"+channel.id;
+
+  }
 
   return (
     <div className="itemChannel" onClick={onClick}>
-      <p>{channel.name}</p>
+      <p>{channel.initial}</p>
+      {accesChan.op === 1 &&
+      <IoMdSettings className="settingsChannel" onClick={toSettings}/>
+      }
     </div>
   );
 }
