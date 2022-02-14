@@ -9,10 +9,15 @@ export default function Messages(){
 
     useEffect(() =>{
         fetch(process.env.REACT_APP_API_URL+"post/")
-            .then(function(res){
+            .then(res => {
                 return res.json();
-            }).then(function(data){
-                setData(data);
+            }).then(res => {
+                if(res.error){
+                    console.error(res.error);
+                  }
+                  else{          
+                setData(res);
+                  }
             })
             .catch(
                 err => {console.log(err)}

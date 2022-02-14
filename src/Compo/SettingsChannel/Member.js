@@ -25,7 +25,12 @@ export default function Member({acces,refreshAcces}){
         return res.json();
       })
       .then((res) => {
+        if(res.error){
+          console.error(res.error);
+        }
+        else{
         setMember(res);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -75,7 +80,12 @@ export default function Member({acces,refreshAcces}){
           return res.json();
         })
         .then((res) => {
+          if(res.error){
+            console.error(res.error);
+          }
+          else{  
             refreshAcces();
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -100,7 +110,12 @@ export default function Member({acces,refreshAcces}){
           return res.json();
         })
         .then((res) => {
+          if(res.error){
+            console.error(res.error);
+          }
+          else{  
             refreshAcces();
+          }
         })
         .catch((err) => {
           console.error(err);

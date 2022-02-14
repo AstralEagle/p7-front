@@ -16,7 +16,7 @@ import { faSignOutAlt, faHeart, faTimes} from '@fortawesome/free-solid-svg-icons
 
 
 export default function App() {
-  library.add( far, faSignOutAlt, faHeart, faTimes);
+  library.add(far, faSignOutAlt, faHeart, faTimes);
   const [connected, setConnect] = useState(false);
 
   if (
@@ -40,8 +40,12 @@ export default function App() {
         return res.json();
       })
       .then((res) => {
-        if (res.succes === "Connected") {
-          setConnect(true);
+        if (res.error) {
+          console.error(res.error);
+        } else {
+          if (res.succes === "Connected") {
+            setConnect(true);
+          }
         }
       })
       .catch((err) => console.error(err));
@@ -55,9 +59,9 @@ export default function App() {
             <Route path="/test" element={<Test />} />
             <Route path="/post" element={<Post />} />
             <Route path="/beta" element={<Beta />} />
-            <Route path="/channel/:idChan" element={<SettingsChan />} />            
-            <Route path="/join/:id" element={<AddAcces />} />   
-            <Route path="/admin" element={<Admin />} />         
+            <Route path="/channel/:idChan" element={<SettingsChan />} />
+            <Route path="/join/:id" element={<AddAcces />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </div>
       );
@@ -67,5 +71,5 @@ export default function App() {
     <div>
       <Login />
     </div>
-  )
+  );
 }

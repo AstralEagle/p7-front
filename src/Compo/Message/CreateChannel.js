@@ -18,10 +18,12 @@ export default function CreateChannel({getAllChan,setChannel}){
         fetch(process.env.REACT_APP_API_URL+'channel',header)
         .then(res => {return res.json()})
         .then(res => {
+            if(res.error){
+                console.error(res.error);
+              }
+              else{      
             getAllChan();
-
-
-            
+              }
         })
         .catch(err => {console.error(err)})
     }

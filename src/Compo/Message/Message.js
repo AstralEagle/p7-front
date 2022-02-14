@@ -23,7 +23,12 @@ export default function Message({message,postMessage,replyMsg}){
       fetch(process.env.REACT_APP_API_URL+"message/"+message.id_reply,header)
       .then(res => {return res.json()})
       .then(res => {
+        if(res.error){
+          console.error(res.error);
+        }
+        else{
         setReply(res)
+      }
       })
       .catch(err => console.error(err));
       

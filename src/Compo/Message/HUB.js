@@ -30,8 +30,12 @@ export default function HUB(){
         return res.json();
       })
       .then((res) => {
-        console.log(res)
+        if(res.error){
+          console.error(res.error);
+        }
+        else{
         setChannels(res);
+      }
       })
       .catch((err) => {
         console.error(err);

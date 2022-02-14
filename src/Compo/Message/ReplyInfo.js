@@ -27,7 +27,12 @@ export default function Reply({reply,setReply}){
         return res.json();
       })
       .then((res) => {
+        if(res.error){
+          console.error(res.error);
+        }
+        else{
         setUser(res);
+        }
       })
       .catch((err) => {
         console.error(err);

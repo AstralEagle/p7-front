@@ -1,5 +1,4 @@
 import ReplyInfo from './ReplyInfo'
-import {IoIosCloseCircle} from 'react-icons/io'
 import '../../Style/PostMessage.css'
 
 export default function PostMessage({channel,postMessage,reply,setReply}){
@@ -26,10 +25,16 @@ export default function PostMessage({channel,postMessage,reply,setReply}){
       body: JSON.stringify(value),
     };
     fetch(process.env.REACT_APP_API_URL + "message/" + channel.id, header)
+    .then(res => {return res.json()})
       .then((res) => {
-        e.target["message"].value = "";
-        setReply(null)
-        postMessage();
+        if(res.error){
+          console.error(res.error);
+        }
+        else{
+          e.target["message"].value = "";
+          setReply(null);
+          postMessage();
+        }
       })
       .catch((err) => {
         console.error(err);

@@ -23,6 +23,11 @@ export default function Post(props){
         fetch(process.env.REACT_APP_API_URL+'post/'+props.valuID,header)
             .then((res) => {return res.json()})
             .then((res) => {
+              if(res.error){
+                console.error(res.error);
+              }
+              else{
+      
                 if(res.isLike){
                     setIsLike(true);
                 }
@@ -30,6 +35,7 @@ export default function Post(props){
                     setIsLike(false);
                 }
                 setLike(res.nbrLike)
+              }
             })
             .catch((err) => {console.error(err)});
     }

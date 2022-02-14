@@ -30,7 +30,12 @@ export default function Banner(){
     fetch(process.env.REACT_APP_API_URL+"auth/"+localStorage.getItem('userID'),header)
     .then(res => {return res.json()})
     .then(res => {
-      setMyUser(res);
+      if(res.error){
+        console.error(res.error);
+      }
+      else{
+        setMyUser(res);
+      }
     }
     )
     .catch(err => {console.error(err)})

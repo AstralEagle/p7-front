@@ -24,8 +24,13 @@ export default function Channel({accesChan,setSelect}){
         return res.json();
       })
       .then((res) => {
-        res.initial = res.name.substring(0,1);
-        setChannel(res);
+        if(res.error){
+          console.error(res.error);
+        }
+        else{
+          res.initial = res.name.substring(0,1);
+          setChannel(res);
+        }
       })
       .catch((err) => {
         console.error(err);

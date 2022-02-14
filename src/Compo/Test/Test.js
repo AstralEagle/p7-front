@@ -23,9 +23,14 @@ export default function Test(){
     };
     fetch(process.env.REACT_APP_API_URL + "message/3/channel", obj)
       .then((res) => res.json())
-      .then((value) => {
-        console.log(value);
-        onChange(value);
+      .then((res) => {
+        if(res.error){
+          console.error(res.error);
+        }
+        else{
+        console.log(res);
+        onChange(res);
+        }
       })
       .catch((err) => {
         console.error(err);

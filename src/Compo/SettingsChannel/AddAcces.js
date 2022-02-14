@@ -18,6 +18,9 @@ export default function Acces(){
   fetch(process.env.REACT_APP_API_URL+"acces/"+link, header)
   .then((res) => {return res.json})
   .then((res) => {
+    if(res.error){
+      console.error(res.error);
+    }
     window.location = "/beta";
   })
   .catch((err) => {console.error(err)})

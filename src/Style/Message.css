@@ -20,7 +20,8 @@
     display: table-cell;
     margin: 0px;
     flex: 1;
-    max-width: 80%;
+    width: 70px;
+    max-width: 70%;
     overflow-wrap: break-word;
 }
 .moreOption{
