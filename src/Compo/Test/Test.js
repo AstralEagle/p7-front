@@ -1,62 +1,67 @@
 import React ,{useState} from 'react';
-import MoreInfo from '../Message/MoreInfoMessage';
-import { IoMdMore } from "react-icons/io";
 
 
 export default function Test(){
 
-  const [isMore, getMoreInfo] = useState(false);
+  const [imgMsg,setImg] = useState(undefined);
 
-  const item = {id_user : 13}
-  const request = () => {
-    var obj = {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer " +
-          localStorage.getItem("token") +
-          " " +
-          localStorage.getItem("userID"),
-      },
-    };
-    fetch(process.env.REACT_APP_API_URL + "message/3/channel", obj)
-      .then((res) => res.json())
-      .then((res) => {
-        if(res.error){
-          console.error(res.error);
-        }
-        else{
-        console.log(res);
-        onChange(res);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-  const onClick = (event) => {
-    getMoreInfo(true);
-  };
-  const onChange = (value) => {
-    const tableau = [[value[0].id_user, []]];
-    let compteur = 0;
-    for (let val of value) {
-      if (tableau[compteur][0] === val.id_user) {
-        tableau[compteur][1].push(val);
-      } else {
-        tableau.push([val.id_user, [val]]);
-        compteur++;
-      }
+  const onChange = (e) => {
+    setImg(e.target.files[0]);
+  }
+  const onSubmit = (e) => {
+
+    e.preventDefault();
+
+    let value = new FormData();
+    const messageValue = {message : e.target['message'].value};
+    if(messageValue.length > 0){
+      console.log("LOL")
     }
-    console.log(tableau);
-  };
+    if(imgMsg !== undefined){
+      value.append('image', e.target['image'].files[0]);
+      value.append('message', JSON.stringify(messageValue));
+    }else value = JSON.stringify(messageValue);
+    console.log(e.target['image'].files[0])
+    const header = {
+      method: "POST",
+      headers: {
+        
+      },
+      body: value,
+    };
+    fetch(process.env.REACT_APP_API_URL+"test", header)
+    .then(res => {return res.json()})
+    .then(res => {
+      if(res.error) console.error(res.error)
+      else console.log(res)
+    })
+    .catch(err => console.error(err))
+  }
+
+
 
   return (
+    <form action="#" onSubmit={onSubmit} >
+      
     <div>
-      <p onClick={onClick}>Test</p>
-      {isMore ? <MoreInfo message={item} />:      <IoMdMore onClick={onClick} />}
-    </div>
+          <input
+            className="imageInput"
+            type="file"
+            name="image"
+            id='testSetterImg'
+            accept="image/jpg, image/jpeg, image/png"
+            onChange={onChange}
+          />
+          {imgMsg !== undefined && (
+            <img
+              className="imageRevisual"
+              src={URL.createObjectURL(imgMsg)}
+              alt="Image_a_envoyer"
+            />
+          )}
+      </div>
+      <input type="text" name='message'/>
+      <input type="submit" />
+    </form>
   );
 }

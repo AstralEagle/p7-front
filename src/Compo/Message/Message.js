@@ -101,16 +101,16 @@ function Render({message,postMessage,replyMsg}){
       },
       body: JSON.stringify({ userID: localStorage.getItem("userID") }),
     };
-    fetch(process.env.REACT_APP_API_URL+'report/'+message.id, header)
-    .then((res) => res.json())
-    .then((res) => {
-      if(res.error){
-        console.error(res.error)
-    }else{
-      console.log(res);
-    }
-    })
-    .catch((err) => console.error(err));
+    fetch(process.env.REACT_APP_API_URL + "report/" + message.id, header)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.error) {
+          console.error(res.error);
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((err) => console.error(err));
   };
   const replyItem = (e) => {
     replyMsg(message);
@@ -118,15 +118,25 @@ function Render({message,postMessage,replyMsg}){
 
   return (
     <div className="coreMsgItem">
-        <p>{" - "+message.message}</p>
-        <div className="moreOption">
-          {message.id_user === parseInt(localStorage.getItem("userID")) ? (
-            <IoIosCloseCircle className="iconItem" onClick={deleteItem} />
-          ) : (
-            <IoIosAlert className="iconItem" onClick={reportItem} />
-          )}
-          <IoIosReturnLeft className="iconItem" onClick={replyItem} />
-        </div>
+      <div className="coreMsgText">
+        <p> - </p>
+        <div>
+        {message.message &&
+        <p className="msgTextMessage">{message.message}</p>
+      }
+      {message.url_img &&
+        <img src={message.url_img} alt="image du message" />
+      }
       </div>
-  )
+      </div>
+      <div className="moreOption">
+        {message.id_user === parseInt(localStorage.getItem("userID")) ? (
+          <IoIosCloseCircle className="iconItem" onClick={deleteItem} />
+        ) : (
+          <IoIosAlert className="iconItem" onClick={reportItem} />
+        )}
+        <IoIosReturnLeft className="iconItem" onClick={replyItem} />
+      </div>
+    </div>
+  );
 }

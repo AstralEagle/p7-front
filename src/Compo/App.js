@@ -9,6 +9,7 @@ import SettingsChan from './SettingsChannel/Index'
 import AddAcces from './SettingsChannel/AddAcces'
 import Admin from './Admin/MessageReport'
 import Test from './Test/Test'
+import User from './User/Index'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { faSignOutAlt, faHeart, faTimes} from '@fortawesome/free-solid-svg-icons'
@@ -62,6 +63,7 @@ export default function App() {
             <Route path="/channel/:idChan" element={<SettingsChan />} />
             <Route path="/join/:id" element={<AddAcces />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/user/:id" element={<User />} />
           </Routes>
         </div>
       );
