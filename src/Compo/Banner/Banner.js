@@ -45,6 +45,9 @@ export default function Banner(){
     localStorage.removeItem("token");
     window.location = "/";
   }
+  const goUser = (e) => {
+    window.location = '/user/'+localStorage.getItem('userID');
+  }
   const onBeta = (e) => {
       window.location = "/beta";
   }
@@ -54,7 +57,7 @@ export default function Banner(){
       <img src={Logo} alt="Logo" onClick={onBeta}/>
       <div>
         <ul>
-          <li>
+          <li onClick={goUser}>
             {myUser.name+" "+ myUser.last_name}
           </li>
           <li>

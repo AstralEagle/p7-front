@@ -35,11 +35,19 @@
     font-size: 20px;
     height: 20px; 
 }
-.msgItem:hover{
+.coreMsgItem:hover{
     background-color: rgb(204, 201, 201);
 }
-.msgItem:hover .moreOption{
+.coreMsgItem:hover .moreOption{
     opacity: 1;
+}
+.coreMsgInfoText{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.msgImage{
+    max-height: 350px;
 }
 .iconItem{    
     font-size: 20px;

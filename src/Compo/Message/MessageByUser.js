@@ -2,10 +2,14 @@ import Msg from './Message';
 
 
 export default function Message({messages, postMessage, replyMsg,scrollBootom}){
-  console.log(messages)
+
+  const goUser = (e) => {
+    window.location = '/user/'+messages[0].id;
+  }
+
   return (
     <div className="msgByUser">
-      <h4 className="userNameMsg">
+      <h4 className="userNameMsg" onClick={goUser}>
         {messages[0].name} {messages[0].lastName}
       </h4>
       {messages[1].map((mess) => (

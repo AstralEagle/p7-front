@@ -119,15 +119,19 @@ function Render({message,postMessage,replyMsg}){
   return (
     <div className="coreMsgItem">
       <div className="coreMsgText">
-        <p> - </p>
-        <div>
-        {message.message &&
-        <p className="msgTextMessage">{message.message}</p>
-      }
-      {message.url_img &&
-        <img src={message.url_img} alt="image du message" />
-      }
-      </div>
+          {message.message && (
+            <div className="coreMsgInfoText">
+              <p> - </p>
+              <p className="msgTextMessage">{message.message}</p>
+            </div>
+          )}
+          {message.url_img && (
+            <img
+              className="msgImage"
+              src={message.url_img}
+              alt="image du message"
+            />
+          )}
       </div>
       <div className="moreOption">
         {message.id_user === parseInt(localStorage.getItem("userID")) ? (
