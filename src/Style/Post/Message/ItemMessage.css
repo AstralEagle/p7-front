@@ -1,0 +1,61 @@
+.mainItemMessage{
+    position: relative;
+    background-color: #e3e3e3;
+    border-radius: 12px;
+   
+}
+.barreMoreInfo{
+    /* POSITION */
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    
+    background-color: #b6b7b0;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding-left: 10px;
+    padding-right: 15px;
+    border-top: solid 5px #ffd7d7;
+}
+
+.namePost{
+    text-align: center;
+    font-size: 30px;
+}
+.userPost{
+    position: absolute;
+    top: -30px;
+    left: -5px;
+    background-color: rgba(196, 196, 196, 0.753);
+    border-radius: 15px;
+    padding: 5px;
+    box-shadow: 2px 2px 5px black;
+}
+.messagePost{
+    padding-bottom: 50px;
+    text-align: center;
+}
+.lineMessagePost{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding: 0px;
+}
+.iconMoreInfo{
+    display: flex;
+    flex-direction: row;
+}
+.barreMoreInfo p{
+    margin: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.iconLiked{
+    color: red;
+}
+.iconNotLiked:hover{
+    color: red;
+}
+.iconComments:hover{
+    color: #4e4e4e;
+}

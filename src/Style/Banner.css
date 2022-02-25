@@ -5,6 +5,11 @@
     padding-left: 50px;
     padding-right: 50px;
     align-items: center;
+    position: relative;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    z-index: 3;
 }
 .banner img{
     width: 200px;

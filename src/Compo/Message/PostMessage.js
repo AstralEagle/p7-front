@@ -5,12 +5,13 @@ import '../../Style/Message/PostMessage.css'
 export default function PostMessage({channel,postMessage,reply,setReply}){
 
   const [imgMsg, setImg] = useState(undefined);
-  const formRef =useRef(null);
+  const imageRef = useRef(null);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     let value = new FormData();
+
     let headers = {
       Authorization:
         "Bearer " +
@@ -66,7 +67,7 @@ export default function PostMessage({channel,postMessage,reply,setReply}){
     setImg(e.target.files[0]);
   };
   return (
-    <form action="#" onSubmit={onSubmit} className="postMessage" ref={formRef}>
+    <form action="#" onSubmit={onSubmit} className="postMessage" >
       <div className="replyMsg">
         {reply !== null && <ReplyInfo reply={reply} setReply={setReply} />}
       </div>
@@ -74,7 +75,13 @@ export default function PostMessage({channel,postMessage,reply,setReply}){
       <div className="coreInputMsg">
         <input type="text" name="message" className="messageInput"></input>
         <div className="coreInputImg">
+          <div
+          onClick={() => imageRef.current.click()}
+          className="selecImage">
+            test
+          </div>
           <input
+            ref={imageRef}
             className="imageInput"
             type="file"
             name="image"

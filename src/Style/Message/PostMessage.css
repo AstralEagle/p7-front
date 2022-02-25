@@ -64,7 +64,7 @@
     flex-direction: column;
 }
 .imageInput{
-    width: 70px;
+    display: none;
 }
 .imageRevisual{
     width: 70px;

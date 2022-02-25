@@ -1,0 +1,14 @@
+.pagePostMain{
+}
+.pagePostInfoName{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+.pagePosteInfoLikeAndComment{
+    position: relative;
+}
+.pagePosteInfoLikeAndComment p{
+    margin: 2px;
+}

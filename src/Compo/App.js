@@ -1,7 +1,8 @@
 import React , {useState} from "react"
 import { Routes, Route } from "react-router-dom"
 import Login from './Form/Log'
-import Post from './Form/Post'
+import Post from './Post/Post/Post'
+import PostPage from './Post/Page/Index'
 import Messages from './Post/Messages'
 import Banner from './Banner/Banner'
 import Beta from './Message/HUB'
@@ -13,7 +14,8 @@ import User from './User/Index'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { faSignOutAlt, faHeart, faTimes} from '@fortawesome/free-solid-svg-icons'
-
+import Request from '../Outil/request'
+import Header from '../Outil/header'
 
 
 export default function App() {
@@ -24,6 +26,7 @@ export default function App() {
     typeof localStorage.getItem("userID") !== "undefined" &&
     localStorage.getItem("userID") !== null
   ) {
+
     const header = {
       method: "GET",
       headers: {
@@ -62,8 +65,9 @@ export default function App() {
             <Route path="/beta" element={<Beta />} />
             <Route path="/channel/:idChan" element={<SettingsChan />} />
             <Route path="/join/:id" element={<AddAcces />} />
-            <Route path="/admin" element={<Admin />} />
             <Route path="/user/:id" element={<User />} />
+            <Route path="/post/:id" element={<PostPage />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </div>
       );

@@ -1,0 +1,13 @@
+.formAddComment{
+    position: absolute;
+    bottom: -20px;
+    right: 0px;
+    display: flex;
+    justify-content: space-between;
+}
+.formAddComment input{
+    border-radius: 5px;
+}
+.textAddComment{
+    flex: 1;
+}

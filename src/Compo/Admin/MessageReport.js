@@ -1,49 +1,33 @@
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import Request from '../../Outil/request'
+import Header from '../../Outil/header'
 
-export default function MessageReport(){
+export default function MessageReport() {
 
-    const [listReportMessage, setReportMessage] = useState([]);
+  const [listReportMessage, setReportMessage] = useState([]);
 
-    useEffect(() => {
-        getReportedMessage();
-    },[])
+  useEffect(() => {
+    getReportedMessage();
+  }, [])
 
-    const getReportedMessage = () => {
-      var header = {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer " +
-            localStorage.getItem("token") +
-            " " +
-            localStorage.getItem("userID"),
-        },
-      };
-      fetch(process.env.REACT_APP_API_URL + "report/",header)
-      .then(res => {return res.json()})
-      .then(res =>{
-          if(res.error){
-              console.error(res.error)
-          }else{
-              setReportMessage(res)
-            }
-
-      })
-      .catch(err => console.error(err))
+  const getReportedMessage = () => {
+    const afterRequest = (res) => {
+      setReportMessage(res)
     }
+    Request("report/",Header.loged("GET"),(res) =>       setReportMessage(res))
+    
+  }
 
 
-    return (
-      <div>
-        {listReportMessage.map((message) => (
-          <div key={"ReportedMessage"+message.id}>
-            <p>
-              {message.message} : {message.nbrReport}
-            </p>
-          </div>
-        ))}
-      </div>
-    );
+  return (
+    <div>
+      {listReportMessage.map((message) => (
+        <div key={"ReportedMessage" + message.id}>
+          <p>
+            {message.message} : {message.nbrReport}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
 }

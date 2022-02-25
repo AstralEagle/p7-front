@@ -41,6 +41,7 @@
 .coreMsgItem:hover .moreOption{
     opacity: 1;
 }
+
 .coreMsgInfoText{
     width: 100%;
     display: flex;

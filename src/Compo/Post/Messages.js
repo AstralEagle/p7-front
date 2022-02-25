@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Post from './Post';
-import '../../Style/PostMessage.css'
+import '../../Style/Post/Message/Message.css'
 
 
 export default function Messages(){
@@ -24,9 +24,9 @@ export default function Messages(){
                 );                
     },[])
     return(
-        <div className="listOfMessage">
+        <div className="AllMsg">
             {data.map(value =>(
-                <Post valuName={value.name} valuDesc={value.description} valuID={value.id} key={value.id+"POST"} />
+                <Post message={value} key={value.id+"POST"} />
             ))}
         </div>
     )

@@ -1,87 +1,98 @@
-import React, {useState, useEffect} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState, useEffect } from 'react';
+import { IoChatbubbleEllipsesOutline, IoHeartOutline, IoHeartSharp } from 'react-icons/io5'
+import PostComment from './Comment/PostComment'
+
+import Request from '../../Outil/request';
+import Header from '../../Outil/header';
+
+import '../../Style/Post/Message/ItemMessage.css'
 
 
-export default function Post(props){
 
-    const name = props.valuName;
-    const description = props.valuDesc.split('\n');
+export default function Post({ message }) {
 
-    const [like,setLike] = useState(0);
-    const [isLiked,setIsLike] = useState(false);
+  const description = message.description.split('\n');
+
+  const [like, setLike] = useState(0);
+  const [comment, setComment] = useState(0);
+  const [isLiked, setIsLike] = useState(false);
+  const [onComment, setOnComment] = useState(false);
 
 
-    const getLike = () =>{
-        const header ={
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')+" "+localStorage.getItem('userID'),
-            },
-        }
-        fetch(process.env.REACT_APP_API_URL+'post/'+props.valuID,header)
-            .then((res) => {return res.json()})
-            .then((res) => {
-              if(res.error){
-                console.error(res.error);
-              }
-              else{
-      
-                if(res.isLike){
-                    setIsLike(true);
-                }
-                else{
-                    setIsLike(false);
-                }
-                setLike(res.nbrLike)
-              }
-            })
-            .catch((err) => {console.error(err)});
+  const getLike = () => {
+    const callBack = (res) => {
+      if (res.isLike) {
+        setIsLike(true);
+      }
+      else {
+        setIsLike(false);
+      }
+      setLike(res.nbrLike)
     }
-    
-    useEffect(() =>{
-        getLike();
-    },[])
+    Request(`post/${message.id}/like`, Header.loged('GET'), callBack);
+  }
 
-
-    const onClick = (event) => {
-        var value = {
-            userID: localStorage.getItem('userID')
-        }
-        var obj = {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + localStorage.getItem('token')+" "+localStorage.getItem('userID'),
-            },
-            body:JSON.stringify(value)
-          }
-            fetch(process.env.REACT_APP_API_URL+'post/'+props.valuID+'/like',obj)
-            .then(res => res.json())
-            .then((value)=>{
-              getLike();
-            }).catch(err => {
-              console.error(err)
-            });
+  const getComment = () => {
+    const callBack = (res) => {
+      setComment(res.length)
     }
-    return (
-      <div className="message">
-        <h3>{name}</h3>
-        <div className="descPara">
-          {description.map((descri) => (
-            <p className="textPara" key={descri+props.valuID}>{descri}</p>
-          ))}
+    Request(`post/${message.id}/comment`, Header.loged('GET'), callBack);
+  }
+
+  useEffect(() => {
+    getLike();
+    getComment();
+  }, [])
+
+
+  const onLikeClick = (e) => {
+
+    e.preventDefault();
+
+    const value = {
+      userID: localStorage.getItem('userID')
+    }
+
+    Request(`post/${message.id}/like`, Header.loged('POST', value), getLike)
+  }
+  const onCommentClick = (e) => {
+
+    e.preventDefault();
+
+    if (onComment)
+      setOnComment(false);
+    else
+      setOnComment(true)
+  }
+  const goToPost = () => {
+    window.location = `/post/${message.id}`
+  }
+  const afterComment = () => {
+    getComment();
+    setOnComment(false);
+  }
+  return (
+    <div className='mainItemMessage'>
+        <a href={`/post/${message.id}`}>
+
+          <h4 className='namePost'>{message.name}</h4>
+          <div className='messagePost'>
+            {description.map(oneLine => (
+              <p className='lineMessagePost' key={message.id + oneLine}>{oneLine}</p>
+              ))}
+          </div>
+              </a>
+        <p className='userPost'>{message.userName + " " + message.userLastName}</p>
+        <div className='barreMoreInfo'>
+          <div className='iconMoreInfo'>
+            <p className='infoLikeMessage'>{isLiked ?
+              (<IoHeartSharp onClick={onLikeClick} className='iconLiked' />) : (<IoHeartOutline onClick={onLikeClick} className='iconNotLiked' />)}{like}</p>
+            <p className='InfoCommentMessage'><IoChatbubbleEllipsesOutline onClick={onCommentClick} className='iconComments' />{comment}</p>
+          </div>
         </div>
-        <div className="shareOption">
-          {isLiked ? (
-            <FontAwesomeIcon icon="heart" size="lg" className="inputLiked" onClick={onClick}/>
-          ) : (
-            <FontAwesomeIcon icon={["far", "heart"]} size="lg" className="inputLike" onClick={onClick} />
-          )}
-          <p>{like}</p>
-        </div>
+        {onComment &&
+          <PostComment message={message} onDisable={afterComment} />}
+
       </div>
-    );
+  );
 }
