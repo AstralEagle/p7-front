@@ -3,7 +3,7 @@ import Header from '../../../Outil/header'
 
 import '../../../Style/Post/Message/Comment/AddComment.css'
 
-export default function Post({message,onDisable}){
+export default function Post({messageID,onDisable}){
 
     const onSubmit = (e) => {
 
@@ -18,7 +18,7 @@ export default function Post({message,onDisable}){
             onDisable();
         }
 
-        Request(`post/${message.id}/comment`,Header.loged('POST',value),callBack);
+        Request(`post/${messageID}/comment`,Header.loged('POST',value),callBack);
 
     }
 

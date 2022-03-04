@@ -2,31 +2,30 @@ import React, {useState, useEffect} from 'react';
 import Post from './Post';
 import '../../Style/Post/Message/Message.css'
 
+import Request from '../../Outil/request';
+import Header from '../../Outil/header';
+
 
 export default function Messages(){
 
     const [data,setData] = useState([]);
 
+    const getMessages = () => {
+
+        const callBack = (res) => {
+            setData(res)
+        }
+
+        Request('post/',Header.loged('GET'),callBack)
+    }
+
     useEffect(() =>{
-        fetch(process.env.REACT_APP_API_URL+"post/")
-            .then(res => {
-                return res.json();
-            }).then(res => {
-                if(res.error){
-                    console.error(res.error);
-                  }
-                  else{          
-                setData(res);
-                  }
-            })
-            .catch(
-                err => {console.log(err)}
-                );                
+        getMessages();              
     },[])
     return(
         <div className="AllMsg">
             {data.map(value =>(
-                <Post message={value} key={value.id+"POST"} />
+                <Post valueMessage={value} key={value.id+"POST"} />
             ))}
         </div>
     )

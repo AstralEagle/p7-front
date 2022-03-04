@@ -9,39 +9,26 @@ import '../../Style/Post/Message/ItemMessage.css'
 
 
 
-export default function Post({ message }) {
-
-  const description = message.description.split('\n');
-
-  const [like, setLike] = useState(0);
-  const [comment, setComment] = useState(0);
-  const [isLiked, setIsLike] = useState(false);
+export default function Post({ valueMessage }) {
+  
+  
+  const description = valueMessage.description.split('\n');
+  const [message,setMessage] = useState({})
   const [onComment, setOnComment] = useState(false);
-
-
-  const getLike = () => {
+  
+  
+  const updateMessage = () => {
+    
+    
     const callBack = (res) => {
-      if (res.isLike) {
-        setIsLike(true);
-      }
-      else {
-        setIsLike(false);
-      }
-      setLike(res.nbrLike)
+      setMessage(res)
     }
-    Request(`post/${message.id}/like`, Header.loged('GET'), callBack);
+    Request(`post/${valueMessage.id}`,Header.loged('GET'),callBack)
   }
 
-  const getComment = () => {
-    const callBack = (res) => {
-      setComment(res.length)
-    }
-    Request(`post/${message.id}/comment`, Header.loged('GET'), callBack);
-  }
 
   useEffect(() => {
-    getLike();
-    getComment();
+    setMessage(valueMessage)
   }, [])
 
 
@@ -53,7 +40,7 @@ export default function Post({ message }) {
       userID: localStorage.getItem('userID')
     }
 
-    Request(`post/${message.id}/like`, Header.loged('POST', value), getLike)
+    Request(`post/${message.id}/like`, Header.loged('POST', value), updateMessage)
   }
   const onCommentClick = (e) => {
 
@@ -64,16 +51,13 @@ export default function Post({ message }) {
     else
       setOnComment(true)
   }
-  const goToPost = () => {
-    window.location = `/post/${message.id}`
-  }
   const afterComment = () => {
-    getComment();
+    updateMessage();
     setOnComment(false);
   }
   return (
     <div className='mainItemMessage'>
-        <a href={`/post/${message.id}`}>
+        <a href={`/post/${valueMessage.id}`}>
 
           <h4 className='namePost'>{message.name}</h4>
           <div className='messagePost'>
@@ -82,16 +66,16 @@ export default function Post({ message }) {
               ))}
           </div>
               </a>
-        <p className='userPost'>{message.userName + " " + message.userLastName}</p>
+        <p className='userPost'>{message.userName + " " + message.userlastName}</p>
         <div className='barreMoreInfo'>
           <div className='iconMoreInfo'>
-            <p className='infoLikeMessage'>{isLiked ?
-              (<IoHeartSharp onClick={onLikeClick} className='iconLiked' />) : (<IoHeartOutline onClick={onLikeClick} className='iconNotLiked' />)}{like}</p>
-            <p className='InfoCommentMessage'><IoChatbubbleEllipsesOutline onClick={onCommentClick} className='iconComments' />{comment}</p>
+            <p className='infoLikeMessage'>{message.isTrue ?
+              (<IoHeartSharp onClick={onLikeClick} className='iconLiked' />) : (<IoHeartOutline onClick={onLikeClick} className='iconNotLiked' />)}{message.nbrLike}</p>
+            <p className='InfoCommentMessage'><IoChatbubbleEllipsesOutline onClick={onCommentClick} className='iconComments' />{message.nbrComment}</p>
           </div>
         </div>
         {onComment &&
-          <PostComment message={message} onDisable={afterComment} />}
+          <PostComment messageID={message.id} onDisable={afterComment} />}
 
       </div>
   );

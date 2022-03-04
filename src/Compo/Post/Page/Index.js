@@ -1,83 +1,110 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { IoChatbubbleEllipsesOutline, IoHeartOutline, IoHeartSharp, IoWarningOutline } from 'react-icons/io5'
-import SendComment from '../Comment/PostComment'
+import {
+  IoChatbubbleEllipsesOutline,
+  IoHeartOutline,
+  IoHeartSharp,
+  IoWarningOutline,
+} from "react-icons/io5";
 
-import Request from '../../../Outil/request';
-import Header from '../../../Outil/header';
+import ItemComment from "./Comment";
+import SendComment from "../Comment/PostComment";
 
-import '../../../Style/Post/Page/Index.css'
+import Request from "../../../Outil/request";
+import Header from "../../../Outil/header";
+
+import "../../../Style/Post/Page/Index.css";
 
 export default function Index() {
+  const idPost = useParams().id;
 
-    const idPost = useParams().id;
+  const [post, setPost] = useState({});
+  const [comments, setComment] = useState([]);
 
-    const [post, setPost] = useState({});
+  const [onComment, setOnComment] = useState(false);
 
-    const [like, setLike] = useState(0);
-    const [isLiked, setIsLike] = useState(false);
-    const [comment,setComment] = useState(0);
-    const [onComment,setOnComment] = useState(false);
+  const getInfoPost = () => {
+    const callBack = (res) => {
+      setPost(res);
+    };
+    Request(`post/${idPost}`, Header.loged("GET"), callBack);
+  };
+  const getAllComment = () => {
+    const callBack = (res) => {
+      setComment(res);
+    };
+    Request(`post/comment/${idPost}`, Header.loged("GET"), callBack);
+  };
 
-    const getInfoPost = () => {
-        const callBack = (res) => {
-            setPost(res);
-        }
-        Request(`post/${idPost}`, Header.loged('GET'), callBack)
-    }
-    const getLike = () => {
-        const callBack = (res) => {
-            if (res.isLike) {
-                setIsLike(true);
-            }
-            else {
-                setIsLike(false);
-            }
-            setLike(res.nbrLike)
-        }
-        Request(`post/${idPost}/like`, Header.loged('GET'), callBack);
-    }
+  useEffect(() => {
+    getInfoPost();
+    getAllComment();
+  }, []);
 
-    useEffect(() => {
-        getInfoPost()
-        getLike()
-    }, [])
+  const onLikeClick = (e) => {
+    e.preventDefault();
 
-    const onLikeClick = (e) => {
+    const value = {
+      userID: localStorage.getItem("userID"),
+    };
 
-        e.preventDefault();
+    Request(`post/${idPost}/like`, Header.loged("POST", value), getInfoPost);
+  };
+  const onCommentClick = (e) => {
+    e.preventDefault();
 
-        const value = {
-            userID: localStorage.getItem('userID')
-        }
+    if (onComment) setOnComment(false);
+    else setOnComment(true);
+  };
+  const onReportClick = (e) => {
+    const callBack = (res) => {
+      console.log(res);
+    };
 
-        Request(`post/${idPost}/like`, Header.loged('POST', value), getLike)
-    }
-    const onCommentClick = (e) => {
+    Request(`post/${idPost}/report`, Header.loged("GET"), callBack);
+  };
+  const afterComment = () => {
+    getInfoPost();
+    getAllComment();
+    setOnComment(false);
+  };
 
-        e.preventDefault();
-    
-        if (onComment)
-          setOnComment(false);
-        else
-          setOnComment(true)
-      }
-
-    return (
-        <div className="pagePostMain">
-            <div className="pagePostInfoName">
-                <h2 className="pagePostName">{post.name}</h2>
-                <div className="pagePosteInfoLikeAndComment">
-                    <p className='infoReportPage'><IoWarningOutline />?</p>
-                    <p className='infoLikeMessage'>{isLiked ?
-                        (<IoHeartSharp onClick={onLikeClick} className='iconLiked' />) : (<IoHeartOutline onClick={onLikeClick} className='iconNotLiked' />)}{like}</p>
-            <p className='InfoCommentMessage'><IoChatbubbleEllipsesOutline onClick={onCommentClick} className='iconComments' />{comment}</p>
-                        {onComment && <SendComment />}
-                </div>
-            </div>
-            <p>{post.description}</p>
-
-
+  return (
+    <div className="pagePostMain">
+      <div className="pagePostInfoName">
+        <h2 className="pagePostName">{post.name}</h2>
+        <div className="pagePosteInfoLikeAndComment">
+          <p className="infoReportPage">
+            <IoWarningOutline onclick={onReportClick}/>?
+          </p>
+          <p className="infoLikeMessage">
+            {post.isTrue ? (
+              <IoHeartSharp onClick={onLikeClick} className="iconLiked" />
+            ) : (
+              <IoHeartOutline onClick={onLikeClick} className="iconNotLiked" />
+            )}
+            {post.nbrLike}
+          </p>
+          <p className="InfoCommentMessage">
+            <IoChatbubbleEllipsesOutline
+              onClick={onCommentClick}
+              className="iconComments"
+            />
+            {post.nbrComment}
+          </p>
+          {onComment && (
+            <SendComment messageID={post.id} onDisable={afterComment} />
+          )}
         </div>
-    )
+      </div>
+      <div>
+        <p>{post.description}</p>
+        <div>
+          {comments.map((comment) => (
+            <ItemComment comment={comment} key={comment.id + "Comment"} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }

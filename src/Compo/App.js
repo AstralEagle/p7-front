@@ -14,8 +14,11 @@ import User from './User/Index'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { faSignOutAlt, faHeart, faTimes} from '@fortawesome/free-solid-svg-icons'
+
 import Request from '../Outil/request'
 import Header from '../Outil/header'
+
+import '../Style/Index.css'
 
 
 export default function App() {

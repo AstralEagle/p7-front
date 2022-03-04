@@ -1,0 +1,9 @@
+color :
+    #FD2D01 rouge	
+    #FFD7D7 rose
+    #091F43 bleu foncé
+
+fonstion . click
+trid js
+gh page
+tini web
