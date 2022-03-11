@@ -10,7 +10,6 @@ import Header from '../../Outil/header'
 
 export default function MessageReport() {
 
-  const [nbrReport,setReport] = useState(2)
 
   const [reportViewer, setView] = useState(0);
   const callMessage = (e) => {
@@ -24,8 +23,7 @@ export default function MessageReport() {
   }
 
   const onChange = (e) => {
-    setReport(e.target.value)
-    console.log(nbrReport);
+    console.log(e.target.value);
   }
 
   return (
@@ -34,7 +32,7 @@ export default function MessageReport() {
           <p onClick={callMessage}>1</p>
           <p onClick={callPost}>2</p>
           <p onClick={callComment}>3</p>
-      <input type="number" name='NbrReport' value={nbrReport} onChange={onChange} />
+      <input type="number" name='NbrReport' defaultValue='2' onChange={onChange} />
       </div>
       {reportViewer === 0 && <ReportMessage />}
       {reportViewer === 1 && <ReportPost/>}
