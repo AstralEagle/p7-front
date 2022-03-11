@@ -1,0 +1,10 @@
+.mainIndex{
+    text-align: center;
+}
+img{
+    border-radius: 15px;
+    border: 2px solid #FFD7D7;
+}
+.mainIndex p{
+    font-size: 20px;
+}

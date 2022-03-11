@@ -1,0 +1,13 @@
+.commentPost:hover .commentReport{
+    opacity: 1;
+}
+.commentPost{
+    font-size: 15px;
+}
+.commentLine{
+    display: flex;
+    align-items: center;
+}
+.commentReport{
+    opacity: 0;
+}

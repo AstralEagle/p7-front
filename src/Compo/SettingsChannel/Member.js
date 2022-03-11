@@ -37,30 +37,38 @@ export default function Member({acces,refreshAcces}){
       });
   };
   const removeAcces = () => {
-    const header = {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer " +
-          localStorage.getItem("token") +
-          " " +
-          localStorage.getItem("userID"),
-      },
-      body: JSON.stringify({idUser: acces.id_user}),
+    if(parseInt(localStorage.getItem("userID"))===parseInt(acces.id_user)){
+      console.error('Vous ne povez pas vous retirer du channel')
+    }
+    else{
+      const header = {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer " +
+            localStorage.getItem("token") +
+            " " +
+            localStorage.getItem("userID"),
+        },
+        body: JSON.stringify({ idUser: acces.id_user }),
+      };
+      fetch(
+        process.env.REACT_APP_API_URL + "acces/force/" + acces.id_channel,
+        header
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          refreshAcces();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
     };
-    fetch(process.env.REACT_APP_API_URL + "acces/force/" + acces.id_channel, header)
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        refreshAcces();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
   const addAdmin = () => {
     const header = {
         method: "POST",

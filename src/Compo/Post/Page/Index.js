@@ -61,7 +61,7 @@ export default function Index() {
       console.log(res);
     };
 
-    Request(`post/${idPost}/report`, Header.loged("GET"), callBack);
+    Request(`report/post/${idPost}`, Header.loged("POST",{userID : localStorage.getItem('userID')}), callBack);
   };
   const afterComment = () => {
     getInfoPost();
@@ -75,7 +75,7 @@ export default function Index() {
         <h2 className="pagePostName">{post.name}</h2>
         <div className="pagePosteInfoLikeAndComment">
           <p className="infoReportPage">
-            <IoWarningOutline onclick={onReportClick}/>?
+            <IoWarningOutline onClick={onReportClick}/>?
           </p>
           <p className="infoLikeMessage">
             {post.isTrue ? (

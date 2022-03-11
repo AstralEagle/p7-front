@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import ReportMessage from '../Admin/MessageReport'
-import ReportPost from '../Admin/PostReport'
-import ReportComment from '../Admin/CommentReport'
+import ReportMessage from './MessageReport'
+import ReportPost from './PostReport'
+import ReportComment from './CommentReport'
 
 
 import Request from '../../Outil/request'

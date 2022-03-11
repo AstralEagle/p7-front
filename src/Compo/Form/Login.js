@@ -23,6 +23,7 @@ export default function Login(){
               return res.json();
             }
         }).then(function(value){
+            console.log(value)
             localStorage.setItem('userID', value.userID);
             localStorage.setItem('token', value.token)
             window.location = "/";

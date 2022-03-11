@@ -14,7 +14,8 @@ export default function MessageReport() {
   }, [])
 
   const getReportedMessage = (nbrReport) => {
-    Request("admin/message/"+nbrReport,Header.loged("GET"),(res) =>       setReportMessage(res))
+      
+    Request("admin/post/"+nbrReport,Header.loged("GET"),(res) =>       setReportMessage(res))
     
   }
 
@@ -23,8 +24,9 @@ export default function MessageReport() {
     <div>
       {listReportMessage.map((message) => (
         <div key={"ReportedMessage" + message.id}>
+          <h4>{message.name}</h4>
           <p>
-            {message.message} : {message.nbrReport}
+            {message.description} : {message.nbrReport}
           </p>
           <IoCloseCircle />
         </div>

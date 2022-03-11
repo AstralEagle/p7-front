@@ -22,3 +22,17 @@ li{
     margin-left: 10px;
     margin-right: 10px;
 }
+.menuBarre{
+    background-color: #c7c0c0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.menuBarre p{
+    margin: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0px;
+    z-index: 2;
+}

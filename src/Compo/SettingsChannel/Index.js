@@ -3,6 +3,9 @@ import {useParams} from 'react-router-dom';
 import Member from './Member'
 import {IoIosCloseCircle} from 'react-icons/io';
 
+import Request from '../../Outil/request'
+import Header from '../../Outil/header'
+
 
 export default function Index(){
 
@@ -16,82 +19,22 @@ export default function Index(){
         getChannel(idChan);
     },[])
     const getAllAccess = ()=>{
-      const header = {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer " +
-            localStorage.getItem("token") +
-            " " +
-            localStorage.getItem("userID"),
-        },
-      };
-      fetch(process.env.REACT_APP_API_URL + "acces/" + idChan, header)
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          if (res.error) {
-            console.error(res.error);
-            window.location = "/beta";
-          } else {
-            console.log(res);
-            setMembers(res);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      const callBack = (res) => {
+        setMembers(res)
+      }
+      Request(`acces/${idChan}`,Header.loged('GET'),callBack)
     }
     const getChannel = (idChannel) => {
-        const header = {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              Authorization:
-                "Bearer " +
-                localStorage.getItem("token") +
-                " " +
-                localStorage.getItem("userID"),
-            },
-          };
-          fetch(process.env.REACT_APP_API_URL + "channel/"+idChannel, header)
-            .then((res) => {
-              return res.json();
-            })
-            .then((res) => {
-                setChannel(res);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
+      const callBack = (res) => {
+        setChannel(res);
+      }
+      Request(`channel/${idChannel}`,Header.loged('GET'),callBack)
     }
     const deletechannel = () => {
-      const header = {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer " +
-            localStorage.getItem("token") +
-            " " +
-            localStorage.getItem("userID"),
-        },
-      };
-      fetch(process.env.REACT_APP_API_URL + "channel/"+idChan, header)
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          window.location = "/beta";
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      const callBack = (res) => {
+        window.location = "/beta";
+      }
+      Request(`channel/${idChan}`,Header.loged('DELETE',{userID : localStorage.getItem('userID')}),callBack)
     }
     return (
         <div>

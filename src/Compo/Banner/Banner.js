@@ -49,21 +49,31 @@ export default function Banner(){
     window.location = '/user/'+localStorage.getItem('userID');
   }
   const onBeta = (e) => {
-      window.location = "/beta";
+      window.location = "/";
+  }
+  const goPost = (e) => {
+    window.location = "/post";
+  }
+  const goMessage = (e) => {
+    window.location = "/message";
   }
 
   return (
-    <div className="banner">
-      <img src={Logo} alt="Logo" onClick={onBeta}/>
-      <div>
-        <ul>
-          <li onClick={goUser}>
-            {myUser.name+" "+ myUser.last_name}
-          </li>
-          <li>
-            <FontAwesomeIcon icon='sign-out-alt' onClick={logOut} size="2x" />
-          </li>
-        </ul>
+    <div className='mainBanner'>
+      <div className="banner">
+        <img src={Logo} alt="Logo" onClick={onBeta} />
+        <div>
+          <ul>
+            <li onClick={goUser}>{myUser.name + " " + myUser.last_name}</li>
+            <li>
+              <FontAwesomeIcon icon="sign-out-alt" onClick={logOut} size="2x" />
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className='menuBarre'>
+        <p onClick={goPost}>Post</p>
+        <p onClick={goMessage}>Message</p>
       </div>
     </div>
   );
