@@ -1,6 +1,9 @@
 import React,{useState, useEffect} from "react"
 import {useParams} from 'react-router-dom'
 
+import Request from '../../Outil/request'
+import Header from '../../Outil/header'
+
 export default function Index(){
 
     var idUser = useParams().id;
@@ -9,40 +12,21 @@ export default function Index(){
     useEffect(() =>{
         getUser();
     },[]);
+
     const getUser = () => {
-        const header = {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              Authorization:
-                "Bearer " +
-                localStorage.getItem("token") +
-                " " +
-                localStorage.getItem("userID"),
-            },
-          };
-          fetch(process.env.REACT_APP_API_URL + "auth/" + idUser, header)
-            .then((res) => {
-              return res.json();
-            })
-            .then((res) => {
-              if (res.error) {
-                console.error(res.error);
-                window.location = "/beta";
-              } else {
-                setUser(res);
-              }
-            })
-            .catch((err) => {
-              console.error(err);
-            }); 
+      const callBack = (res) => {
+        setUser(res);
+      }
+
+      Request(`auth/${idUser}`,Header.loged('GET'),callBack);
     }
 
 
     return (
         <div>
-            <p>{user.name}</p>
+            <p>{user.name}{user.last_name}</p>
+            
+
         </div>
     )
 }

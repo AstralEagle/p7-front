@@ -3,12 +3,28 @@
 .pagePostInfoName{
     display: flex;
     justify-content: space-between;
-    padding-left: 150px;
-    padding-right: 150px;
 }
 .pagePosteInfoLikeAndComment{
     position: relative;
+    flex: 1;
+    text-align: center;
+}
+.pagePostName{
+    flex: 1;
+    text-align: center;
 }
 .pagePosteInfoLikeAndComment p{
     margin: 2px;
+}
+.infoPostDown{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+.textPost{
+    font-size: 16px;
+    flex : 1;
+}
+.listComment{
+    flex: 1;
 }

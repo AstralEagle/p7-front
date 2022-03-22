@@ -97,9 +97,9 @@ export default function Index() {
           )}
         </div>
       </div>
-      <div>
-        <p>{post.description}</p>
-        <div>
+      <div className="infoPostDown">
+        <p className="textPost">{post.description}</p>
+        <div className="listComment">
           {comments.map((comment) => (
             <ItemComment comment={comment} key={comment.id + "Comment"} />
           ))}

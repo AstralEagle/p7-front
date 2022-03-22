@@ -1,21 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 
 import Request from '../../Outil/request'
 import Header from '../../Outil/header'
 
-import {IoCloseCircle} from 'react-icons/io5'
+import { IoCloseCircle } from 'react-icons/io5'
 
-export default function MessageReport() {
+const MessageReport = forwardRef((props, ref) => {
 
   const [listReportMessage, setReportMessage] = useState([]);
+
+  useImperativeHandle(ref, () => {
+    return {
+      updateReport: (nbrReport) => {
+        getReportedMessage(nbrReport)
+      }
+    }
+  })
 
   useEffect(() => {
     getReportedMessage(2);
   }, [])
 
   const getReportedMessage = (nbrReport) => {
-    Request("admin/message/"+nbrReport,Header.loged("GET"),(res) =>       setReportMessage(res))
-    
+    Request("admin/message/" + nbrReport, Header.loged("GET"), (res) => setReportMessage(res))
+
+  }
+  const forceDelete = (nbrIndex) => {
+    const callBack = () => {
+
+    }
+    Request(`admin/message/${nbrIndex}`,Header.loged('DELETE'),callBack)
   }
 
 
@@ -26,9 +40,11 @@ export default function MessageReport() {
           <p>
             {message.message} : {message.nbrReport}
           </p>
-          <IoCloseCircle />
+          <IoCloseCircle onClick={() => forceDelete(message.id)} />
         </div>
       ))}
     </div>
   );
-}
+})
+
+export default MessageReport;

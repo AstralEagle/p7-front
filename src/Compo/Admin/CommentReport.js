@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,forwardRef ,useImperativeHandle } from 'react';
 
 import Request from '../../Outil/request'
 import Header from '../../Outil/header'
 
 import {IoCloseCircle} from 'react-icons/io5'
 
-export default function MessageReport() {
-
+const ListComment = forwardRef((props,ref) => {
   const [listReportMessage, setReportMessage] = useState([]);
 
+  useImperativeHandle(ref,()=>{
+    return{
+      updateReport : (nbrReport) => {getReportedMessage(nbrReport)}
+    }
+  })
+
   useEffect(() => {
-    getReportedMessage(2);
+    getReportedMessage(1);
   }, [])
 
   const getReportedMessage = (nbrReport) => {
@@ -19,6 +24,12 @@ export default function MessageReport() {
     
   }
 
+  const forceDeleteComment = (id) => {
+    const callBack = (res) => {
+
+    }
+    Request(`admin/comment/${id}`,Header.loged('DELETE'),callBack)
+  }
 
   return (
     <div>
@@ -27,9 +38,11 @@ export default function MessageReport() {
           <p>
             {message.comment} : {message.nbrReport}
           </p>
-          <IoCloseCircle />
+          <IoCloseCircle onClick={() => forceDeleteComment(message.id)}/>
         </div>
       ))}
     </div>
   );
-}
+});
+
+export default ListComment;

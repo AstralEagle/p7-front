@@ -1,8 +1,9 @@
-import {useState, useRef} from 'react'
+import { useState, useRef } from 'react'
+import { IoImage,IoCloseCircle } from 'react-icons/io5'
 import ReplyInfo from './ReplyInfo'
 import '../../Style/Message/PostMessage.css'
 
-export default function PostMessage({channel,postMessage,reply,setReply}){
+export default function PostMessage({ channel, postMessage, reply, setReply }) {
 
   const [imgMsg, setImg] = useState(undefined);
   const imageRef = useRef(null);
@@ -23,21 +24,23 @@ export default function PostMessage({channel,postMessage,reply,setReply}){
     const messageValue = {
       userID: localStorage.getItem("userID"),
     };
-    if(e.target['message'].value !== "")
-    messageValue.message = e.target["message"].value
+    if (e.target['message'].value !== "")
+      messageValue.message = e.target["message"].value
     if (reply !== null) {
       messageValue.replyID = reply.id;
     }
-    if(imgMsg !== undefined){
+    if (imgMsg !== undefined) {
       console.log(e.target["image"].files[0])
       value.append('image', imgMsg);
       value.append('message', JSON.stringify(messageValue));
-    }else {
+    } else {
       value = JSON.stringify(messageValue);
-      headers = Object.assign(headers, {'Accept': 'application/json',
-      'Content-Type': 'application/json',})
+      headers = Object.assign(headers, {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      })
     }
-    
+
 
     const header = {
       method: "POST",
@@ -66,6 +69,10 @@ export default function PostMessage({channel,postMessage,reply,setReply}){
     console.log(e.target.value)
     setImg(e.target.files[0]);
   };
+
+  const removeImg = () => {
+    setImg(undefined);
+  }
   return (
     <form action="#" onSubmit={onSubmit} className="postMessage" >
       <div className="replyMsg">
@@ -75,11 +82,6 @@ export default function PostMessage({channel,postMessage,reply,setReply}){
       <div className="coreInputMsg">
         <input type="text" name="message" className="messageInput"></input>
         <div className="coreInputImg">
-          <div
-          onClick={() => imageRef.current.click()}
-          className="selecImage">
-            test
-          </div>
           <input
             ref={imageRef}
             className="imageInput"
@@ -88,7 +90,17 @@ export default function PostMessage({channel,postMessage,reply,setReply}){
             accept="image/jpg, image/jpeg, image/png"
             onChange={onChange}
           />
+          <div>
+
+            <IoImage
+              onClick={() => imageRef.current.click()}
+              className="selecImage" />
+            {imgMsg !== undefined &&(
+              <IoCloseCircle onClick={removeImg} />
+            )}
+          </div>
           {imgMsg !== undefined && (
+
             <img
               className="imageRevisual"
               src={URL.createObjectURL(imgMsg)}

@@ -1,3 +1,7 @@
+.mainBanner{
+    position: relative;
+    z-index: 3;
+}
 .banner{
     display: flex;
     justify-content: space-between;

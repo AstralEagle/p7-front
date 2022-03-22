@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import ReportMessage from './MessageReport'
 import ReportPost from './PostReport'
@@ -8,8 +8,11 @@ import ReportComment from './CommentReport'
 import Request from '../../Outil/request'
 import Header from '../../Outil/header'
 
-export default function MessageReport() {
+export default function IndexAdmin() {
 
+  const refMessage = useRef();
+  const refPost = useRef();
+  const refComment = useRef();
 
   const [reportViewer, setView] = useState(0);
   const callMessage = (e) => {
@@ -24,19 +27,30 @@ export default function MessageReport() {
 
   const onChange = (e) => {
     console.log(e.target.value);
+    switch(reportViewer){
+      case 0:
+        refMessage.current.updateReport(e.target.value);
+        break;
+      case 1:
+        refPost.current.updateReport(e.target.value)
+        break;
+      case 2:
+        refComment.current.updateReport(e.target.value)
+        break;
+    }
   }
 
   return (
     <div>
       <div className='barreReportView'>
-          <p onClick={callMessage}>1</p>
-          <p onClick={callPost}>2</p>
-          <p onClick={callComment}>3</p>
-      <input type="number" name='NbrReport' defaultValue='2' onChange={onChange} />
+          <p onClick={callMessage}>Message</p>
+          <p onClick={callPost}>Post</p>
+          <p onClick={callComment}>Comment</p>
+      <input type="number" name='NbrReport' defaultValue='2' min='1' max='25' onChange={onChange} />
       </div>
-      {reportViewer === 0 && <ReportMessage />}
-      {reportViewer === 1 && <ReportPost/>}
-      {reportViewer === 2 && <ReportComment/>}
+      {reportViewer === 0 && <ReportMessage ref={refMessage}/>}
+      {reportViewer === 1 && <ReportPost ref={refPost}/>}
+      {reportViewer === 2 && <ReportComment ref={refComment}/>}
 
     </div>
   );
