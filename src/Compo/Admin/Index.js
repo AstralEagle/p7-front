@@ -34,7 +34,7 @@ export default function IndexAdmin() {
       case 1:
         refPost.current.updateReport(e.target.value)
         break;
-      case 2:
+      case 2: 
         refComment.current.updateReport(e.target.value)
         break;
     }
