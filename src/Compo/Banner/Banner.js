@@ -1,6 +1,11 @@
 import React,{useState,useEffect} from 'react';
-import Logo from '../../IMG/icon-left-font-monochrome-black.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import Request from '../../Outil/request'
+import Header from '../../Outil/header'
+
+import Logo from '../../IMG/icon-left-font-monochrome-black.png';
+
 import '../../Style/Banner.css';
 
 
@@ -11,34 +16,14 @@ export default function Banner(){
   
 
   useEffect(() => {
-    getUser(localStorage.getItem('userID'))
+    getUser()
   },[])
 
   const getUser = () => {
-    var header = {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer " +
-          localStorage.getItem("token") +
-          " " +
-          localStorage.getItem("userID"),
-      }
-    };
-    fetch(process.env.REACT_APP_API_URL+"auth/"+localStorage.getItem('userID'),header)
-    .then(res => {return res.json()})
-    .then(res => {
-      if(res.error){
-        console.error(res.error);
-      }
-      else{
-        setMyUser(res);
-      }
+    const callBack = (res) => {
+      setMyUser(res);
     }
-    )
-    .catch(err => {console.error(err)})
+    Request(`auth/${localStorage.getItem('userID')}`,Header.loged('GET'),callBack)
   }
   const logOut = (event) => {
     localStorage.removeItem("userID");
@@ -48,7 +33,7 @@ export default function Banner(){
   const goUser = (e) => {
     window.location = '/user/'+localStorage.getItem('userID');
   }
-  const onBeta = (e) => {
+  const onIcon = (e) => {
       window.location = "/";
   }
   const goPost = (e) => {
@@ -61,7 +46,7 @@ export default function Banner(){
   return (
     <div className='mainBanner'>
       <div className="banner">
-        <img src={Logo} alt="Logo" onClick={onBeta} />
+        <img src={Logo} alt="Logo" onClick={onIcon} />
         <div>
           <ul>
             <li onClick={goUser}>{myUser.name + " " + myUser.last_name}</li>
