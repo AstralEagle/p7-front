@@ -22,7 +22,7 @@ export default function Likes({ idUser }) {
   return (
     <div>
       {listLike.map((post) => (
-        <Item post={post} />
+        <Item post={post} key={post.id+'item'} />
       ))}
     </div>
   );

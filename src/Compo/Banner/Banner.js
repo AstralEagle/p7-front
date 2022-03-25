@@ -1,30 +1,13 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 import { IoLogOutOutline , IoStarOutline } from 'react-icons/io5';
-
-import Request from '../../Outil/request'
-import Header from '../../Outil/header'
 
 import Logo from '../../IMG/icon-left-font-monochrome-black.png';
 
 import '../../Style/Banner.css';
 
 
-
-export default function Banner(){
-
-  const [myUser,setMyUser] = useState({});
+export default function Banner({myUser}){
   
-
-  useEffect(() => {
-    getUser()
-  },[])
-
-  const getUser = () => {
-    const callBack = (res) => {
-      setMyUser(res);
-    }
-    Request(`auth/`,Header.loged('GET'),callBack)
-  }
   const logOut = (event) => {
     localStorage.removeItem("userID");
     localStorage.removeItem("token");

@@ -49,7 +49,7 @@ const ReportPost = forwardRef((props, ref) => {
           <p>
             {message.description} : {message.nbrReport}
           </p>
-          <IoCloseCircle />
+          <IoCloseCircle onClick={forceDelete} />
         </div>
       ))}
     </div>

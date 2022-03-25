@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
 
-export default function Item({post}){
-
-return(
+export default function Item({ post }) {
+    console.log(post)
+  return (
     <div>
-        <p>{post.name}</p>
+      <p>{post.name}</p>
+      <p>{post.description}</p>
+      <div>
+          <p>{post.nbrComment}</p>
+          <p>{post.nbrLike}</p>
+      </div>
     </div>
-)
-
+  );
 }

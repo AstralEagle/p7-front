@@ -12,7 +12,7 @@ export default function Posts({ idUser }) {
     const callBack = (res) => {
       setLikes(res);
     };
-    Request(`auth/${idUser}/post`, Header.loged("GET"), callBack);
+    Request(`auth/${idUser}/posts`, Header.loged("GET"), callBack);
   };
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function Posts({ idUser }) {
   return (
     <div>
       {listLike.map((post) => (
-        <Item post={post} />
+        <Item post={post} key={post.id+'item'} />
       ))}
     </div>
   );
