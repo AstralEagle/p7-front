@@ -22,7 +22,14 @@ const MessageReport = forwardRef((props, ref) => {
   }, [])
 
   const getReportedMessage = (nbrReport) => {
-    Request("admin/message/" + nbrReport, Header.loged("GET"), (res) => setReportMessage(res))
+
+    const callBack = (res) => {
+      setReportMessage(res)
+    }
+    const errorBack = () => {
+      window.location = '/'
+    }
+    Request("admin/message/" + nbrReport, Header.loged("GET"),callBack,errorBack)
 
   }
   const forceDelete = (nbrIndex) => {

@@ -23,7 +23,13 @@ const ReportPost = forwardRef((props, ref) => {
 
   const getReportedMessage = (nbrReport) => {
 
-    Request("admin/post/" + nbrReport, Header.loged("GET"), (res) => setReportMessage(res))
+    const callBack = (res) => {
+      setReportMessage(res)
+    }
+    const errorBack = () => {
+      window.location = '/'
+    }
+    Request("admin/post/" + nbrReport, Header.loged("GET"),callBack,errorBack)
 
   }
 

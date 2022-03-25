@@ -20,7 +20,13 @@ const ListComment = forwardRef((props,ref) => {
 
   const getReportedMessage = (nbrReport) => {
       
-    Request("admin/comment/"+nbrReport,Header.loged("GET"),(res) =>       setReportMessage(res))
+    const callBack = (res) => {
+      setReportMessage(res)
+    }
+    const errorBack = () => {
+      window.location = '/'
+    }
+    Request("admin/comment/"+nbrReport,Header.loged("GET"),callBack,errorBack)
     
   }
 

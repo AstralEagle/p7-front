@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IoLogOutOutline , IoStarOutline } from 'react-icons/io5';
 
 import Request from '../../Outil/request'
 import Header from '../../Outil/header'
@@ -23,12 +23,15 @@ export default function Banner(){
     const callBack = (res) => {
       setMyUser(res);
     }
-    Request(`auth/${localStorage.getItem('userID')}`,Header.loged('GET'),callBack)
+    Request(`auth/`,Header.loged('GET'),callBack)
   }
   const logOut = (event) => {
     localStorage.removeItem("userID");
     localStorage.removeItem("token");
     window.location = "/";
+  }
+  const goAdmin = (e) => {
+    window.location = '/admin';
   }
   const goUser = (e) => {
     window.location = '/user/'+localStorage.getItem('userID');
@@ -50,8 +53,13 @@ export default function Banner(){
         <div>
           <ul>
             <li onClick={goUser}>{myUser.name + " " + myUser.last_name}</li>
+            {myUser.op && (
             <li>
-              <FontAwesomeIcon icon="sign-out-alt" onClick={logOut} size="2x" />
+              <IoStarOutline onClick={goAdmin} />
+            </li>
+              )}
+            <li>
+              <IoLogOutOutline onClick={logOut} />
             </li>
           </ul>
         </div>
