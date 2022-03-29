@@ -36,11 +36,13 @@ export default function App() {
     }
   };
 
+
   if (myUser) {
     return (
       <div>
         <Banner myUser={myUser} />
         <Routes>
+
           <Route exact path="/" element={<Index />} />
           <Route path="/log" element={<Login />} />
           <Route path="/test" element={<Test />} />
@@ -54,6 +56,8 @@ export default function App() {
           <Route path="/post/:id" element={<PostPage />} />
           
           {myUser.op && <Route path="/admin" element={<Admin />} />}
+
+          <Route default path="*" element={<Index />} />
         </Routes>
       </div>
     );

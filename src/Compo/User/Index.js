@@ -25,6 +25,14 @@ export default function Index(){
         getUser();
     },[]);
 
+    const deleteUser = (e) => {
+      const callBack = (res) => {
+        localStorage.removeItem('userID');
+        localStorage.removeItem('token');
+        window.location = '/';
+      }
+      Request(`auth/${idUser}`,Header.loged('DELETE'),callBack)
+    }
     const switchPost = (e) => {
       setView(false);
     }
@@ -35,6 +43,8 @@ export default function Index(){
     return (
         <div>
             <p>{user.name}{user.last_name}</p>
+            {localStorage.getItem('userID') === idUser & (<p onClick={deleteUser}>Supp</p>)}
+
             <div>
               <div>
                 <p onClick={switchPost}>Posts</p>
