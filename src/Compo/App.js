@@ -32,7 +32,7 @@ export default function App() {
       const callBack = (res) => {
         setConnect(res);
       };
-      Request("auth/", Header.loged("GET"), callBack);
+      Request("auth/", Header.loged("GET"), callBack,);
     }
   };
 

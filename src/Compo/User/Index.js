@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from "react"
 import {useParams} from 'react-router-dom'
+import {IoSend,IoHeart,IoCloseCircle} from 'react-icons/io5'
 
 import Request from '../../Outil/request'
 import Header from '../../Outil/header'
@@ -42,13 +43,13 @@ export default function Index(){
 
     return (
         <div>
-            <p>{user.name}{user.last_name}</p>
-            {localStorage.getItem('userID') === idUser & (<p onClick={deleteUser}>Supp</p>)}
+            <p>{user.name}{user.last_name}{localStorage.getItem('userID') === idUser && (<IoCloseCircle onClick={deleteUser} />)}</p>
+            <p>Inscrit depuis {user.date[0]}/{user.date[2]}/{user.date[1]}</p>
 
             <div>
               <div>
-                <p onClick={switchPost}>Posts</p>
-                <p onClick={switchLike}>Likes</p>
+                <p onClick={switchPost}><IoSend />{user.nbrPost}</p>
+                <p onClick={switchLike}><IoHeart />{user.nbrLike}</p>
                 </div>
                 {viewBox ?
                 (

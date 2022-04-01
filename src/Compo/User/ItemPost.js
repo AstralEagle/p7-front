@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Item({ post }) {
-    console.log(post)
   return (
     <div>
       <p>{post.name}</p>
