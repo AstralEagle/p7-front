@@ -31,7 +31,9 @@ export default function Post({ valueMessage }) {
     setMessage(valueMessage)
   }, [])
 
-
+  const onUserClick = (e) => {
+    window.location = `/user/${message.userID}`
+  }
   const onLikeClick = (e) => {
 
     e.preventDefault();
@@ -66,7 +68,7 @@ export default function Post({ valueMessage }) {
               ))}
           </div>
               </a>
-        <p className='userPost'>{message.userName + " " + message.userlastName}</p>
+        <p className='userPost' onClick={onUserClick}>{message.userName + " " + message.userlastName}</p>
         <div className='barreMoreInfo'>
           <div className='iconMoreInfo'>
             <p className='infoLikeMessage'>{message.isTrue ?

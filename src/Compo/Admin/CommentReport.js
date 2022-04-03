@@ -5,7 +5,7 @@ import Header from '../../Outil/header'
 
 import {IoCloseCircle} from 'react-icons/io5'
 
-const ListComment = forwardRef((props,ref) => {
+const ListComment = forwardRef(({nbrInit},ref) => {
   const [listReportMessage, setReportMessage] = useState([]);
 
   useImperativeHandle(ref,()=>{
@@ -15,7 +15,7 @@ const ListComment = forwardRef((props,ref) => {
   })
 
   useEffect(() => {
-    getReportedMessage(1);
+    getReportedMessage(nbrInit);
   }, [])
 
   const getReportedMessage = (nbrReport) => {

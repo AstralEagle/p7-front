@@ -5,7 +5,7 @@ import Header from '../../Outil/header'
 
 import { IoCloseCircle } from 'react-icons/io5'
 
-const MessageReport = forwardRef((props, ref) => {
+const MessageReport = forwardRef(({nbrInit}, ref) => {
 
   const [listReportMessage, setReportMessage] = useState([]);
 
@@ -18,7 +18,7 @@ const MessageReport = forwardRef((props, ref) => {
   })
 
   useEffect(() => {
-    getReportedMessage(2);
+    getReportedMessage(nbrInit);
   }, [])
 
   const getReportedMessage = (nbrReport) => {

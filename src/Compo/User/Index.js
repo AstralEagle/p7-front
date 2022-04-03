@@ -8,7 +8,7 @@ import Header from '../../Outil/header'
 import ListLikes from './ListLike'
 import ListPost from './ListPost'
 
-export default function Index(){
+export default function Index({myUser}){
 
     var idUser = useParams().id;
     const [user,setUser] = useState({});
@@ -32,7 +32,8 @@ export default function Index(){
         localStorage.removeItem('token');
         window.location = '/';
       }
-      Request(`auth/${idUser}`,Header.loged('DELETE'),callBack)
+      const value = {userID : localStorage.getItem('userID')}
+      Request(`auth/${idUser}`,Header.loged('DELETE',value),callBack)
     }
     const switchPost = (e) => {
       setView(false);
@@ -43,8 +44,11 @@ export default function Index(){
 
     return (
         <div>
-            <p>{user.name}{user.last_name}{localStorage.getItem('userID') === idUser && (<IoCloseCircle onClick={deleteUser} />)}</p>
-            <p>Inscrit depuis {user.date[0]}/{user.date[2]}/{user.date[1]}</p>
+            <p>{user.name} {user.last_name} {
+            localStorage.getItem('userID') === idUser | myUser.op ?
+            (<IoCloseCircle onClick={deleteUser} />):(<></>)
+            }</p>
+            <p>Inscrit depuis {user.date}</p>
 
             <div>
               <div>

@@ -5,6 +5,7 @@ import {
   IoHeartOutline,
   IoHeartSharp,
   IoWarningOutline,
+  IoCloseCircle
 } from "react-icons/io5";
 
 import ItemComment from "./Comment";
@@ -15,7 +16,7 @@ import Header from "../../../Outil/header";
 
 import "../../../Style/Post/Page/Index.css";
 
-export default function Index() {
+export default function Index({myUser}) {
   const idPost = useParams().id;
 
   const [post, setPost] = useState({});
@@ -26,6 +27,7 @@ export default function Index() {
   const getInfoPost = () => {
     const callBack = (res) => {
       setPost(res);
+      console.log(res)
     };
     Request(`post/${idPost}`, Header.loged("GET"), callBack);
   };
@@ -63,6 +65,9 @@ export default function Index() {
 
     Request(`report/post/${idPost}`, Header.loged("POST",{userID : localStorage.getItem('userID')}), callBack);
   };
+  const onDeleteClick = (e) => {
+
+  }
   const afterComment = () => {
     getInfoPost();
     getAllComment();
@@ -75,7 +80,10 @@ export default function Index() {
         <h2 className="pagePostName">{post.name}</h2>
         <div className="pagePosteInfoLikeAndComment">
           <p className="infoReportPage">
-            <IoWarningOutline onClick={onReportClick}/>?
+            {localStorage.getItem('userID') === post.userID | myUser.op ?
+            (<IoCloseCircle onClick={onDeleteClick} />):
+            (<IoWarningOutline onClick={onReportClick}/>)
+            }
           </p>
           <p className="infoLikeMessage">
             {post.isTrue ? (
