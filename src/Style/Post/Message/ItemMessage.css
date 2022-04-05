@@ -2,7 +2,9 @@
     position: relative;
     background-color: #e3e3e3;
     border-radius: 12px;
-   
+}
+.mainItemMessage:hover {
+    box-shadow: 5px 5px 5px rgb(49, 49, 49);
 }
 .barreMoreInfo{
     /* POSITION */

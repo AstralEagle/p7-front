@@ -14,8 +14,10 @@ export default function IndexAdmin() {
   const refPost = useRef();
   const refComment = useRef();
   const refInput = useRef();
-
+  
   const [reportViewer, setView] = useState(0);
+  const [nbrRep,setNbrRep] = useState(2);
+
   const callMessage = (e) => {
     setView(0);
   }
@@ -28,6 +30,7 @@ export default function IndexAdmin() {
 
   const onChange = (e) => { 
     console.log(refInput.current.value);
+    setNbrRep(e.target.value);
     
     switch(reportViewer){
       case 0:
@@ -48,11 +51,11 @@ export default function IndexAdmin() {
           <p onClick={callMessage}>Message</p>
           <p onClick={callPost}>Post</p>
           <p onClick={callComment}>Comment</p>
-      <input type="number" name='NbrReport' defaultValue='2' min='1' max='25' onChange={onChange} ref={refInput}/>
+      <input type="number" name='NbrReport' defaultValue={nbrRep} min='1' max='25' onChange={onChange} ref={refInput}/>
       </div>
-      {reportViewer === 0 && <ReportMessage ref={refMessage} nbrInit={refInput.current.value} />}
-      {reportViewer === 1 && <ReportPost ref={refPost} nbrInit={refInput.current.value} />}
-      {reportViewer === 2 && <ReportComment ref={refComment} nbrInit={refInput.current.value} />}
+      {reportViewer === 0 && <ReportMessage ref={refMessage} nbrInit={nbrRep} />}
+      {reportViewer === 1 && <ReportPost ref={refPost} nbrInit={nbrRep} />}
+      {reportViewer === 2 && <ReportComment ref={refComment} nbrInit={nbrRep} />}
 
     </div>
   );

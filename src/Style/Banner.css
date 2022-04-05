@@ -1,6 +1,7 @@
 .mainBanner{
     position: relative;
     z-index: 3;
+    font-weight: bold;
 }
 .banner{
     display: flex;
@@ -25,6 +26,10 @@ li{
     list-style-type: none;
     margin-left: 10px;
     margin-right: 10px;
+    font-size: 20px;
+}
+li:hover{
+    color: grey;
 }
 .menuBarre{
     background-color: #c7c0c5;
@@ -34,9 +39,11 @@ li{
     justify-content: space-around;
 }
 .menuBarre p{
+    flex: 1;
+    text-align: center;
     margin: 0px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 0px;
     z-index: 2;
+}
+.menuBarre p:hover{
+    background-color: rgb(221, 218, 218);
 }

@@ -80,7 +80,7 @@ export default function Index({myUser}) {
         <h2 className="pagePostName">{post.name}</h2>
         <div className="pagePosteInfoLikeAndComment">
           <p className="infoReportPage">
-            {localStorage.getItem('userID') === post.userID | myUser.op ?
+            {localStorage.getItem('userID') === post.userID ?
             (<IoCloseCircle onClick={onDeleteClick} />):
             (<IoWarningOutline onClick={onReportClick}/>)
             }
