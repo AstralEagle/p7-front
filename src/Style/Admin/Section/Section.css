@@ -1,0 +1,8 @@
+.reportItem{
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+.divMessageReport{
+    flex: 1;
+}

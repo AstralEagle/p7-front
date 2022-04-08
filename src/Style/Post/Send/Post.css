@@ -1,0 +1,37 @@
+.mainDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formPost {
+    background-color: #FFD7D7;
+    border: 1px solid rgb(104, 103, 103);
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+}
+.formPost div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+input{
+    border-radius: 5px;
+    text-align: center;
+}
+textarea{
+    height: 150px;
+    width: 350px;
+    border-radius: 10px;
+    text-align: center;
+}
+.errorName{
+    color: red;
+    font-weight: bold;
+}
+.descripFormu {
+    margin-top: 15px;
+}
+.sendPost {
+    margin-top: 10px;
+}

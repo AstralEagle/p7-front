@@ -1,0 +1,7 @@
+.barreReportView{
+    display: flex;
+    margin-top: 20px;
+}
+.barreReportView p {
+    margin: 2px;
+}

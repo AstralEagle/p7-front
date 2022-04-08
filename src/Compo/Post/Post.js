@@ -53,18 +53,20 @@ export default function Post({ valueMessage }) {
     else
       setOnComment(true)
   }
+  
   const afterComment = () => {
     updateMessage();
     setOnComment(false);
   }
+
   return (
     <div className='mainItemMessage'>
         <a href={`/post/${valueMessage.id}`}>
 
           <h4 className='namePost'>{message.name}</h4>
           <div className='messagePost'>
-            {description.map(oneLine => (
-              <p className='lineMessagePost' key={message.id + oneLine}>{oneLine}</p>
+            {description.map((oneLine,ex) => (
+              <p className='lineMessagePost' key={'desc_Post'+ex}>{oneLine}</p>
               ))}
           </div>
               </a>

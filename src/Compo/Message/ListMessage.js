@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
+
 import Message from './MessageByUser';
 import Post from "./PostMessage";
+
 import '../../Style/listMsg.css'
 
 export default function Listmessages({channel}) {

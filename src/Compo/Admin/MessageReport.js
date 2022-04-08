@@ -1,57 +1,71 @@
-import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
+import React, {
+  useEffect,
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+} from "react";
+import { IoCloseCircle } from "react-icons/io5";
 
-import Request from '../../Outil/request'
-import Header from '../../Outil/header'
+import Request from "../../Outil/request";
+import Header from "../../Outil/header";
 
-import { IoCloseCircle } from 'react-icons/io5'
+import '../../Style/Admin/Section/Section.css'
 
-const MessageReport = forwardRef(({nbrInit}, ref) => {
-
+const MessageReport = forwardRef(({ nbrInit }, ref) => {
   const [listReportMessage, setReportMessage] = useState([]);
+  const refSection = useRef();
+
+  const getReportedMessage = (nbrReport) => {
+    const callBack = (res) => {
+      setReportMessage(res);
+    };
+    const errorBack = () => {
+      window.location = "/";
+    };
+    Request(
+      "admin/message/" + nbrReport,
+      Header.loged("GET"),
+      callBack,
+      errorBack
+    );
+  };
+
+  useEffect(() => {
+    getReportedMessage(nbrInit);
+  }, []);
 
   useImperativeHandle(ref, () => {
     return {
       updateReport: (nbrReport) => {
-        getReportedMessage(nbrReport)
-      }
-    }
-  })
+        getReportedMessage(nbrReport);
+      },
+    };
+  });
 
-  useEffect(() => {
-    getReportedMessage(nbrInit);
-  }, [])
-
-  const getReportedMessage = (nbrReport) => {
-
-    const callBack = (res) => {
-      setReportMessage(res)
-    }
-    const errorBack = () => {
-      window.location = '/'
-    }
-    Request("admin/message/" + nbrReport, Header.loged("GET"),callBack,errorBack)
-
-  }
   const forceDelete = (nbrIndex) => {
-    const callBack = () => {
-
-    }
-    Request(`admin/message/${nbrIndex}`,Header.loged('DELETE'),callBack)
-  }
-
+    const callBack = () => {};
+    Request(`admin/message/${nbrIndex}`, Header.loged("DELETE"), callBack);
+  };
 
   return (
-    <div>
+    <div className="mainReportDiv" ref={refSection}>
       {listReportMessage.map((message) => (
-        <div key={"ReportedMessage" + message.id}>
-          <p>
-            {message.message} : {message.nbrReport}
-          </p>
-          <IoCloseCircle onClick={() => forceDelete(message.id)} />
+        <div key={"ReportedMessage" + message.id} className="reportItem">
+        
+          <div className="divMessageReport">
+            <p>
+              {message.message} : {message.nbrReport}
+            </p>
+          </div>
+          <IoCloseCircle
+            onClick={() => forceDelete(message.id)}
+            className="deleteReport"
+          />
         </div>
       ))}
     </div>
   );
-})
+});
 
 export default MessageReport;

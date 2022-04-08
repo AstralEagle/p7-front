@@ -1,13 +1,22 @@
-.commentPost:hover .commentReport{
-    opacity: 1;
+.commentPost {
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 15px;
 }
-.commentPost{
-    font-size: 15px;
+.commentName {
+    margin: 0px;
 }
-.commentLine{
-    display: flex;
-    align-items: center;
+.commentLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.commentReport{
-    opacity: 0;
+.hiddenButton {
+  opacity: 0;
+}
+.commentPost:hover {
+  background: rgb(219, 219, 219);
+}
+.commentPost:hover .hiddenButton {
+  opacity: 1;
 }

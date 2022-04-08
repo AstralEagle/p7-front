@@ -8,17 +8,19 @@ export default function Post({messageID,onDisable}){
     const onSubmit = (e) => {
 
         e.preventDefault();
+        if(e.target['comment'].value !==''){
 
-        const value = {
-            userID : localStorage.getItem('userID'),
-            comment : e.target['comment'].value
+            const value = {
+                userID : localStorage.getItem('userID'),
+                comment : e.target['comment'].value
+            }
+            
+            const callBack = (res) => {
+                onDisable();
+            }
+            
+            Request(`post/${messageID}/comment`,Header.loged('POST',value),callBack);
         }
-        
-        const callBack = (res) => {
-            onDisable();
-        }
-
-        Request(`post/${messageID}/comment`,Header.loged('POST',value),callBack);
 
     }
 

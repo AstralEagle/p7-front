@@ -35,8 +35,10 @@
     box-shadow: 2px 2px 5px black;
 }
 .messagePost{
-    padding-bottom: 50px;
+    height: 100px;
+    margin-bottom: 10px;
     text-align: center;
+    overflow: hidden;
 }
 .lineMessagePost{
     margin-top: 2px;

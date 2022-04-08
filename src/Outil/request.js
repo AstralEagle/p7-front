@@ -14,7 +14,7 @@ export default function RequestWithErro(url,header,callBack,errorBack){
             else if(!errorBack)
                 console.error(res);
             else
-                errorBack();
+                errorBack(res);
         }
         else
             callBack(res)
