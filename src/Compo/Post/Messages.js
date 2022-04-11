@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {IoAddCircle} from 'react-icons/io5'
 
 import Post from './Post';
@@ -12,6 +12,8 @@ export default function Messages(){
 
     const [data,setData] = useState([]);
 
+    const refViewPost = useRef();
+
     const getMessages = () => {
 
         const callBack = (res) => {
@@ -21,14 +23,21 @@ export default function Messages(){
         Request('post/',Header.loged('GET'),callBack)
     }
 
+    const resizeView = () => {
+        refViewPost.current.style.height = parseInt(window.innerHeight) - 129 + "px";
+  
+      }
+
     useEffect(() =>{
-        getMessages();              
+        getMessages(); 
+        resizeView();
+        window.addEventListener('resize', resizeView)             
     },[])
     const goSend = (e) => {
         window.location = '/send'
     }
     return(
-        <div className="AllMsg">
+        <div className="AllMsg" ref={refViewPost}>
             {data.map(value =>(
                 <Post valueMessage={value} key={value.id+"POST"} />
             ))}

@@ -11,6 +11,7 @@ import ListPost from './ListPost'
 export default function Index({myUser}){
 
     var idUser = useParams().id;
+
     const [user,setUser] = useState({});
     const [viewBox, setView] = useState(false);
 

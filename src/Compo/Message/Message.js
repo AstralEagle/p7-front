@@ -101,7 +101,7 @@ function Render({message,postMessage,replyMsg}){
       },
       body: JSON.stringify({ userID: localStorage.getItem("userID") }),
     };
-    fetch(process.env.REACT_APP_API_URL + "report/" + message.id, header)
+    fetch(process.env.REACT_APP_API_URL + "report/message/" + message.id, header)
       .then((res) => res.json())
       .then((res) => {
         if (res.error) {
