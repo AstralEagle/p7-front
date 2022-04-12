@@ -1,7 +1,17 @@
+.barreInfoAdmin{
+    display: flex;
+}
 .barreReportView{
     display: flex;
     margin-top: 20px;
 }
 .barreReportView p {
     margin: 2px;
+}
+.mainDivMessage{
+    border: 1px solid black;
+    border-radius: 15px;
+    overflow-y: scroll;
+    padding-left: 10px;
+    padding-right: 10px;
 }

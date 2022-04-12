@@ -16,6 +16,7 @@ const MessageReport = forwardRef(({ nbrInit }, ref) => {
   const [listReportMessage, setReportMessage] = useState([]);
   const refSection = useRef();
 
+
   const getReportedMessage = (nbrReport) => {
     const callBack = (res) => {
       setReportMessage(res);

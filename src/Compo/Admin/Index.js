@@ -10,6 +10,8 @@ import Header from "../../Outil/header";
 import "../../Style/Admin/Index.css";
 
 export default function IndexAdmin() {
+
+  const refDivMain = useRef();
   const refMessage = useRef();
   const refPost = useRef();
   const refComment = useRef();
@@ -18,6 +20,16 @@ export default function IndexAdmin() {
   const [reportViewer, setView] = useState(0);
   const [nbrRep, setNbrRep] = useState(2);
 
+  const resizeDiv = () => {
+    refDivMain.current.style.height = parseInt(window.innerHeight) - 150 + 'px'
+  }
+
+  useEffect(() => {
+    resizeDiv();
+    window.addEventListener('resize',resizeDiv)
+  },[])
+  
+  
   const callMessage = (e) => {
     setView(0);
   };
@@ -28,10 +40,10 @@ export default function IndexAdmin() {
     setView(2);
   };
 
+  
   const onChange = (e) => {
     console.log(refInput.current.value);
     setNbrRep(e.target.value);
-
     switch (reportViewer) {
       case 0:
         refMessage.current.updateReport(e.target.value);
@@ -47,12 +59,13 @@ export default function IndexAdmin() {
 
   return (
     <div>
-      <div>
+      <div className="barreInfoAdmin">
         <div className="barreReportView">
           <p onClick={callMessage}>Message</p>
           <p onClick={callPost}>Post</p>
           <p onClick={callComment}>Comment</p>
         </div>
+        
         <input
           type="number"
           name="NbrReport"
@@ -63,13 +76,15 @@ export default function IndexAdmin() {
           ref={refInput}
         />
       </div>
-      {reportViewer === 0 && (
-        <ReportMessage ref={refMessage} nbrInit={nbrRep} />
-      )}
-      {reportViewer === 1 && <ReportPost ref={refPost} nbrInit={nbrRep} />}
-      {reportViewer === 2 && (
-        <ReportComment ref={refComment} nbrInit={nbrRep} />
-      )}
+      <div className="mainDivMessage" ref={refDivMain}>
+        {reportViewer === 0 && (
+          <ReportMessage ref={refMessage} nbrInit={nbrRep} />
+        )}
+        {reportViewer === 1 && <ReportPost ref={refPost} nbrInit={nbrRep} />}
+        {reportViewer === 2 && (
+          <ReportComment ref={refComment} nbrInit={nbrRep} />
+        )}
+      </div>
     </div>
   );
 }
