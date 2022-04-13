@@ -1,12 +1,24 @@
 .barreInfoAdmin{
     display: flex;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+    text-align: center;
 }
 .barreReportView{
     display: flex;
-    margin-top: 20px;
+    margin: 0px;
+}
+.nbrAdminreport{
+    width: 40px;
+    height: 20px;
 }
 .barreReportView p {
-    margin: 2px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.barreReportView :hover {
+    font-weight: bold;
 }
 .mainDivMessage{
     border: 1px solid black;
@@ -14,4 +26,6 @@
     overflow-y: scroll;
     padding-left: 10px;
     padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }

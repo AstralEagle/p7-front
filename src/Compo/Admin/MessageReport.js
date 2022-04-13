@@ -3,19 +3,16 @@ import React, {
   useState,
   forwardRef,
   useImperativeHandle,
-  useRef,
 } from "react";
 import { IoCloseCircle } from "react-icons/io5";
 
 import Request from "../../Outil/request";
 import Header from "../../Outil/header";
 
-import '../../Style/Admin/Section/Section.css'
+import "../../Style/Admin/Section/Section.css";
 
 const MessageReport = forwardRef(({ nbrInit }, ref) => {
   const [listReportMessage, setReportMessage] = useState([]);
-  const refSection = useRef();
-
 
   const getReportedMessage = (nbrReport) => {
     const callBack = (res) => {
@@ -50,10 +47,10 @@ const MessageReport = forwardRef(({ nbrInit }, ref) => {
   };
 
   return (
-    <div className="mainReportDiv" ref={refSection}>
-      {listReportMessage.map((message) => (
-        <div key={"ReportedMessage" + message.id} className="reportItem">
-        
+    <div className="mainReportDiv">
+      <h2>Message</h2>
+      {listReportMessage.map((message, ex) => (
+        <div key={ex} className="reportItem">
           <div className="divMessageReport">
             <p>
               {message.message} : {message.nbrReport}

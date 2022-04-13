@@ -1,6 +1,8 @@
-import React, {useState,useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 
-export default function Member({acces,refreshAcces}){
+import "../../Style/Message/SettingChannel/Member/Member.css";
+
+export default function Member({ acces, refreshAcces }) {
   const [member, setMember] = useState({});
 
   useEffect(() => {
@@ -25,11 +27,10 @@ export default function Member({acces,refreshAcces}){
         return res.json();
       })
       .then((res) => {
-        if(res.error){
+        if (res.error) {
           console.error(res.error);
-        }
-        else{
-        setMember(res);
+        } else {
+          setMember(res);
         }
       })
       .catch((err) => {
@@ -37,10 +38,9 @@ export default function Member({acces,refreshAcces}){
       });
   };
   const removeAcces = () => {
-    if(parseInt(localStorage.getItem("userID"))===parseInt(acces.id_user)){
-      console.error('Vous ne povez pas vous retirer du channel')
-    }
-    else{
+    if (parseInt(localStorage.getItem("userID")) === parseInt(acces.id_user)) {
+      console.error("Vous ne povez pas vous retirer du channel");
+    } else {
       const header = {
         method: "DELETE",
         headers: {
@@ -68,77 +68,93 @@ export default function Member({acces,refreshAcces}){
           console.error(err);
         });
     }
-    };
+  };
   const addAdmin = () => {
     const header = {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer " +
-            localStorage.getItem("token") +
-            " " +
-            localStorage.getItem("userID"),
-        },
-        body: JSON.stringify({idUser: acces.id_user}),
-      };
-      fetch(process.env.REACT_APP_API_URL + "acces/op/" + acces.id_channel, header)
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          if(res.error){
-            console.error(res.error);
-          }
-          else{  
-            refreshAcces();
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-  }
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer " +
+          localStorage.getItem("token") +
+          " " +
+          localStorage.getItem("userID"),
+      },
+      body: JSON.stringify({ idUser: acces.id_user }),
+    };
+    fetch(
+      process.env.REACT_APP_API_URL + "acces/op/" + acces.id_channel,
+      header
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        if (res.error) {
+          console.error(res.error);
+        } else {
+          refreshAcces();
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   const removeAdmin = () => {
     const header = {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer " +
-            localStorage.getItem("token") +
-            " " +
-            localStorage.getItem("userID"),
-        },
-        body: JSON.stringify({idUser: acces.id_user}),
-      };
-      fetch(process.env.REACT_APP_API_URL + "acces/deop/" + acces.id_channel, header)
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          if(res.error){
-            console.error(res.error);
-          }
-          else{  
-            refreshAcces();
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-  }
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer " +
+          localStorage.getItem("token") +
+          " " +
+          localStorage.getItem("userID"),
+      },
+      body: JSON.stringify({ idUser: acces.id_user }),
+    };
+    fetch(
+      process.env.REACT_APP_API_URL + "acces/deop/" + acces.id_channel,
+      header
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        if (res.error) {
+          console.error(res.error);
+        } else {
+          refreshAcces();
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
-    <div>
-      <p>{member.name}</p>
-      <input type="submit" className="submitButt" value="Kick du channel" onClick={removeAcces}/>
-      {acces.op === 0 ? (
-        <input type="submit" className="submitButt" value="Op" onClick={addAdmin}/>
-      ) : (
-        <input type="submit" className="submitButt" value="DeOP" onClick={removeAdmin} />
-      )}
+    <div className="itemUserChan">
+      <h3>{member.name}</h3>
+      <div>
+        <input
+          type="submit"
+          className="inputSettChan"
+          value="Kick du channel"
+          onClick={removeAcces}
+        />
+        {acces.op === 0 ? (
+          <input type="submit" className="inputSettChan" value="Op" onClick={addAdmin} />
+        ) : (
+          <input
+            type="submit"
+            className="inputSettChan"
+            value="DeOP"
+            onClick={removeAdmin}
+          />
+        )}
+      </div>
     </div>
   );
 }

@@ -4,8 +4,6 @@ import ReportMessage from "./MessageReport";
 import ReportPost from "./PostReport";
 import ReportComment from "./CommentReport";
 
-import Request from "../../Outil/request";
-import Header from "../../Outil/header";
 
 import "../../Style/Admin/Index.css";
 
@@ -21,7 +19,7 @@ export default function IndexAdmin() {
   const [nbrRep, setNbrRep] = useState(2);
 
   const resizeDiv = () => {
-    refDivMain.current.style.height = parseInt(window.innerHeight) - 150 + 'px'
+    refDivMain.current.style.height = parseInt(window.innerHeight) - 170 + 'px'
   }
 
   useEffect(() => {
@@ -74,6 +72,7 @@ export default function IndexAdmin() {
           max="25"
           onChange={onChange}
           ref={refInput}
+          className='nbrAdminreport'
         />
       </div>
       <div className="mainDivMessage" ref={refDivMain}>

@@ -1,41 +1,47 @@
+import React, { useRef, useEffect } from "react";
 
-export default function CreateChannel({getAllChan,setChannel}){
+import Request from "../../Outil/request";
+import Header from "../../Outil/header";
 
-    const onSubmit = (e) =>{
-        e.preventDefault();
-        const header = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')+" "+localStorage.getItem('userID'),
-            },
-            body: JSON.stringify({
-                nameChan : e.target['name'].value,
-                userID : localStorage.getItem('userID')
-            })
-        }
-        fetch(process.env.REACT_APP_API_URL+'channel',header)
-        .then(res => {return res.json()})
-        .then(res => {
-            if(res.error){
-                console.error(res.error);
-              }
-              else{      
-            getAllChan();
-              }
-        })
-        .catch(err => {console.error(err)})
+import "../../Style/Message/CreateChan/CreatChan.css";
+
+export default function CreateChannel({ getAllChan, setChannel }) {
+  const divRef = useRef();
+
+    const resizeDiv = () => {
+        divRef.current.style.height = parseInt(window.innerHeight) - 80 + 'px'
     }
 
-    return(
-        <div>
-            <p>Create a new channel</p>
-            <form action='#' onSubmit={onSubmit} className='formCreateChannel'>
-                <label htmlFor='name' className='labelName'>Nom du channel</label>
-                <input type='text' name='name' className='inputName'/>
-                <input type='submit' />
-            </form>
-        </div>
-    )
+    useEffect(() => {
+        resizeDiv();
+        window.addEventListener('resize', resizeDiv);
+    },[])
+
+  const onSubmit = (e) => {
+
+    e.preventDefault();
+
+    const value = {
+      nameChan: e.target["name"].value,
+      userID: localStorage.getItem("userID"),
+    };
+    const callBack = () => {
+      getAllChan();
+    };
+
+    Request("channel", Header.loged("POST", value), callBack);
+  };
+
+  return (
+    <div className='newChanDiv' ref={divRef}>
+      <h3>Nouveau Channel</h3>
+      <form action="#" onSubmit={onSubmit} className="formCreateChannel">
+        <label htmlFor="name" className="labelName">
+          Nom du channel
+        </label>
+        <input type="text" name="name" className="inputName" />
+        <input type="submit" />
+      </form>
+    </div>
+  );
 }
