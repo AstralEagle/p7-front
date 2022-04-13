@@ -34,8 +34,8 @@ export default function Banner({myUser}){
       <div className="banner">
         <img src={Logo} alt="Logo" onClick={onIcon} />
         <div>
-          <ul>
-            <li onClick={goUser}>{myUser.name + " " + myUser.last_name}</li>
+          <ul className='listCommandBanner'>
+            <li className='userItemBanner' onClick={goUser}>{myUser.name + " " + myUser.last_name}</li>
             {myUser.op && (
             <li>
               <IoStarOutline onClick={goAdmin} />

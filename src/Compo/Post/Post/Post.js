@@ -10,7 +10,10 @@ export default function Post() {
   const refMain = useRef();
 
   const resizeItem = () => {
+    if(parseInt(window.innerWidth) > 768)
     refMain.current.style.height = parseInt(window.innerHeight) - 80 + "px";
+    else
+    refMain.current.style.height = 'auto'
   };
   //860
 

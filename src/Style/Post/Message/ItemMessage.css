@@ -2,6 +2,9 @@
     position: relative;
     background-color: #e3e3e3;
     border-radius: 12px;
+    width: 50%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .mainItemMessage:hover {
     box-shadow: 5px 5px 5px rgb(49, 49, 49);
@@ -62,4 +65,13 @@
 }
 .iconComments:hover{
     color: #4e4e4e;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .mainItemMessage{
+        width: 80%;
+    }
+    
+
 }

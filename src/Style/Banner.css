@@ -47,3 +47,15 @@ li:hover{
 .menuBarre p:hover{
     background-color: rgb(221, 218, 218);
 }
+
+@media only screen and (max-width: 768px) {
+    .banner{
+        flex-direction: column;
+    }
+    .listCommandBanner{
+        height: 25px;
+    }
+    .userItemBanner{
+        overflow: hidden;
+    }
+}

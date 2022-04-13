@@ -21,7 +21,7 @@ export default function Index() {
 
   const [post, setPost] = useState({});
   const [comments, setComment] = useState([]);
-  const [description,setDescription] = useState([])
+  const [description, setDescription] = useState([]);
 
   const refComments = useRef();
 
@@ -29,9 +29,8 @@ export default function Index() {
 
   const getInfoPost = () => {
     const callBack = (res) => {
-      setDescription(res.description.split('\n'))
+      setDescription(res.description.split("\n"));
       setPost(res);
-    
     };
     Request(`post/${idPost}`, Header.loged("GET"), callBack);
   };
@@ -42,7 +41,10 @@ export default function Index() {
     Request(`post/comment/${idPost}`, Header.loged("GET"), callBack);
   };
   const resizeComment = () => {
-    refComments.current.style.height = parseInt(window.innerHeight) - 164 + "px";
+    if (parseInt(window.innerWidth) > 768)
+      refComments.current.style.height =
+        parseInt(window.innerHeight) - 164 + "px";
+    else refComments.current.style.height = "auto";
   };
 
   useEffect(() => {
@@ -79,14 +81,12 @@ export default function Index() {
     );
   };
   const onDeleteClick = (e) => {
-    if(window.confirm('Supprimer ce post?')){
-
+    if (window.confirm("Supprimer ce post?")) {
       const callBack = (res) => {
-        window.location = '/post'
-      }
-      Request(`post/${idPost}`,Header.loged('DELETE'),callBack);
+        window.location = "/post";
+      };
+      Request(`post/${idPost}`, Header.loged("DELETE"), callBack);
     }
-    
   };
   const afterComment = () => {
     getInfoPost();
@@ -128,14 +128,18 @@ export default function Index() {
       </div>
       <div className="infoPostDown">
         <div className="textPost">
-          {description.map((oneLine,ex) => (
-            <p key={'description'+ ex}>{oneLine}</p>
+          {description.map((oneLine, ex) => (
+            <p key={"description" + ex}>{oneLine}</p>
           ))}
         </div>
         <div className="borderComment">
           <div className="listComment" ref={refComments}>
             {comments.map((comment) => (
-              <ItemComment comment={comment} refreshComment={afterComment} key={comment.id + "Comment"} />
+              <ItemComment
+                comment={comment}
+                refreshComment={afterComment}
+                key={comment.id + "Comment"}
+              />
             ))}
           </div>
         </div>
