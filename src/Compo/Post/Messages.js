@@ -24,8 +24,11 @@ export default function Messages(){
     }
 
     const resizeView = () => {
+        if(parseInt(window.innerWidth)>768)
         refViewPost.current.style.height = parseInt(window.innerHeight) - 129 + "px";
-  
+        else
+        refViewPost.current.style.height = parseInt(window.innerHeight) - 187 + "px";
+
       }
 
     useEffect(() =>{
