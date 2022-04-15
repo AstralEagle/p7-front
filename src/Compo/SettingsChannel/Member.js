@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import "../../Style/Message/SettingChannel/Member/Member.css";
+import "../../Style/Message/Channel/Setting/Member/Member.css";
 
 export default function Member({ acces, refreshAcces }) {
   const [member, setMember] = useState({});

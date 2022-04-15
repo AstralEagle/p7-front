@@ -64,6 +64,9 @@
         width: 80%;
         align-self: center;
     }
+    .textPost p{
+        margin: 0px;
+    }
     .borderComment{
         width: 90%;
         align-self: center;

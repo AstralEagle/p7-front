@@ -1,85 +1,74 @@
-import { useState, useRef } from 'react'
-import { IoImage,IoCloseCircle } from 'react-icons/io5'
-import ReplyInfo from './ReplyInfo'
-import '../../Style/Message/PostMessage.css'
+import { useState, useRef } from "react";
+import { IoImage, IoCloseCircle } from "react-icons/io5";
+
+import ReplyInfo from "./ReplyInfo";
+
+import Request from '../../Outil/request'
+import Header from '../../Outil/header'
+
+import "../../Style/Message/Message/Send/Post.css";
 
 export default function PostMessage({ channel, postMessage, reply, setReply }) {
-
+ 
   const [imgMsg, setImg] = useState(undefined);
+  const [errorMessage,setError] = useState(undefined);
+
+
   const imageRef = useRef(null);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    let value = new FormData();
-
-    let headers = {
-      Authorization:
-        "Bearer " +
-        localStorage.getItem("token") +
-        " " +
-        localStorage.getItem("userID"),
-    }
+    let header = Header.loged('POST')
+    
 
     const messageValue = {
       userID: localStorage.getItem("userID"),
     };
-    if (e.target['message'].value !== "")
-      messageValue.message = e.target["message"].value
+    if (e.target["message"].value !== "")
+      messageValue.message = e.target["message"].value;
     if (reply !== null) {
       messageValue.replyID = reply.id;
     }
     if (imgMsg !== undefined) {
-      console.log(e.target["image"].files[0])
-      value.append('image', imgMsg);
-      value.append('message', JSON.stringify(messageValue));
+      let value = new FormData();
+      value.append("image", imgMsg);
+      value.append("message", JSON.stringify(messageValue));
+      header = Header.loged('POST',value,true)
     } else {
-      value = JSON.stringify(messageValue);
-      headers = Object.assign(headers, {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      })
+      header = Header.loged('POST',messageValue)
+      
     }
 
+    const callBack = (res) => {
+      e.target["message"].value = "";
+      setReply(null);
+      postMessage();
+    }
+    const errorBack = (res) => {
+    
+    }
 
-    const header = {
-      method: "POST",
-      headers: headers,
-      body: value,
-    };
-    fetch(process.env.REACT_APP_API_URL + "message/" + channel.id, header)
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        if (res.error) {
-          console.error(res.error);
-        } else {
-          e.target["message"].value = "";
-          setReply(null);
-          postMessage();
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    Request(`message/${channel.id}`,header,callBack,errorBack)
+
   };
 
   const onChange = (e) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     setImg(e.target.files[0]);
   };
 
   const removeImg = () => {
     setImg(undefined);
-  }
+  };
   return (
-    <form action="#" onSubmit={onSubmit} className="postMessage" >
+    <form action="#" onSubmit={onSubmit} className="postMessage">
       <div className="replyMsg">
         {reply !== null && <ReplyInfo reply={reply} setReply={setReply} />}
       </div>
 
       <div className="coreInputMsg">
+        <p className="errorMsg">{errorMessage}</p>
         <input type="text" name="message" className="messageInput"></input>
         <div className="coreInputImg">
           <input
@@ -90,23 +79,22 @@ export default function PostMessage({ channel, postMessage, reply, setReply }) {
             accept="image/jpg, image/jpeg, image/png"
             onChange={onChange}
           />
-          <div>
-
-            <IoImage
-              onClick={() => imageRef.current.click()}
-              className="selecImage" />
-            {imgMsg !== undefined &&(
-              <IoCloseCircle onClick={removeImg} />
+          <div className="imageSectionPostMessage">
+            <div className="inputImageSetting">
+              <IoImage
+                onClick={() => imageRef.current.click()}
+                className="selecImage"
+              />
+              {imgMsg !== undefined && <IoCloseCircle onClick={removeImg} />}
+            </div>
+            {imgMsg !== undefined && (
+              <img
+                className="imageRevisual"
+                src={URL.createObjectURL(imgMsg)}
+                alt="Image_a_envoyer"
+              />
             )}
           </div>
-          {imgMsg !== undefined && (
-
-            <img
-              className="imageRevisual"
-              src={URL.createObjectURL(imgMsg)}
-              alt="Image_a_envoyer"
-            />
-          )}
         </div>
       </div>
       <input type="submit" />

@@ -1,0 +1,52 @@
+.mainBannerChannel{
+    position: relative;
+    display: flex;
+}
+.listBorder {
+  width: 80px;
+  height: 100%;
+  overflow-x: hidden;
+  border-right: 1px solid black;
+}
+.listChannels {
+  padding-right: 20px;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+.infoListChannel{
+    top: 0px;
+    right: -40px;
+
+}
+.iconActiv{
+    background-color: rgb(196, 196, 196);
+    font-size: 20px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+@media only screen and (max-width: 768px) {
+    .mainBannerChannel{
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .iconActiv{
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 5px;
+    }
+    .listBorder {
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid black;
+    border-right: none;
+    overflow-y: hidden;
+  }
+  .listChannels {
+    padding-bottom: 20px;
+    width: 100%;
+    flex-direction: row;
+    overflow-y: hidden;
+    overflow-x: scroll;
+  }
+}

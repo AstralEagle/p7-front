@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {IoMdAdd,IoMdSettings} from 'react-icons/io'
-import '../../Style/Channel.css';
+import '../../Style/Message/Channel/List/Item/Channel.css';
 
 
 export default function Channel({accesChan,setSelect}){

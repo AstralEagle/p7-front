@@ -6,7 +6,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 import Request from "../../Outil/request";
 import Header from "../../Outil/header";
 
-import "../../Style/Message/SettingChannel/Index.css";
+import "../../Style/Message/Channel/Setting/Index.css";
 
 export default function Index() {
   let idChan = useParams().idChan;
@@ -17,7 +17,10 @@ export default function Index() {
   const divRef = useRef();
 
   const resizeDiv = () => {
-    divRef.current.style.height = parseInt(window.innerHeight) - 200 + "px";
+    if (parseInt(window.innerWidth) > 768)
+      divRef.current.style.height = parseInt(window.innerHeight) - 200 + "px";
+    else
+      divRef.current.style.height = parseInt(window.innerHeight) - 250 + "px";
   };
 
   useEffect(() => {
@@ -25,7 +28,6 @@ export default function Index() {
     getChannel(idChan);
     resizeDiv();
     window.addEventListener("resize", resizeDiv);
-    
   }, []);
   const getAllAccess = () => {
     const callBack = (res) => {
@@ -55,13 +57,13 @@ export default function Index() {
         {channel.name}
         <IoIosCloseCircle className="removeReply" onClick={deletechannel} />
       </h2>
-      <h3>Lien : 
+      <h3>
+        Lien :
         <a href={"http://localhost:3000/join/" + idChan}>
           {"http://localhost:3000/join/" + idChan}
         </a>
       </h3>
       <div className="listUserChan" ref={divRef}>
-      
         {members.map((member) => (
           <Member
             acces={member}

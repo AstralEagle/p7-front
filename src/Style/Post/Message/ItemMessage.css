@@ -38,8 +38,8 @@
     box-shadow: 2px 2px 5px black;
 }
 .messagePost{
-    height: 100px;
-    margin-bottom: 10px;
+    height: 60px;
+    padding-bottom: 30px;
     text-align: center;
     overflow: hidden;
 }

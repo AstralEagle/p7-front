@@ -13,7 +13,7 @@ export default function Post() {
     if(parseInt(window.innerWidth) > 768)
     refMain.current.style.height = parseInt(window.innerHeight) - 80 + "px";
     else
-    refMain.current.style.height = 'auto'
+    refMain.current.style.height = parseInt(window.innerHeight) - 150 + "px";
   };
   //860
 

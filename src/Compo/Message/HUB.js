@@ -1,8 +1,10 @@
 import React, {useState} from "react";
+
 import ChannelList from "./BannerChannel";
 import MessageList from './ListMessage';
 import CreateChannel from './CreateChannel'
-import '../../Style/hub.css';
+
+import '../../Style/Message/HUB.css';
 
 
 export default function HUB(){
@@ -46,8 +48,8 @@ export default function HUB(){
     <div className="hubMessage">
       <ChannelList setChannel={setChannelId} channels={channels} getAllChan={requestChannel}/>
       {channel.id === 0 ?
-      <CreateChannel setChannel={setChannelId} getAllChan={requestChannel}/>:
-      <MessageList channel={channel} />
+      (<CreateChannel setChannel={setChannelId} getAllChan={requestChannel}/>):
+      (<MessageList channel={channel} />)
     }
     </div>
   );

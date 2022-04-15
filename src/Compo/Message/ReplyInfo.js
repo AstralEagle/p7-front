@@ -44,10 +44,10 @@ export default function Reply({reply,setReply}){
   };
 
   return (
-    <div>
+    <>
       <p>{user.name + " " + user.last_name}</p>
       <p>{reply.message}</p>
       <IoIosCloseCircle className="removeReply" onClick={deleteReply} />
-    </div>
+    </>
   );
 }

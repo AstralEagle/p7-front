@@ -1,0 +1,55 @@
+.postMessage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.replyMsg {
+  display: flex;
+  height: 30px;
+  align-items: center;
+}
+.messageInput{
+    height: 20px;
+    width: 280px;
+    margin-bottom: 15px;
+}
+.errorMsg{
+    height: 20px;
+    margin: 0px;
+}
+.imageInput {
+    display: none;
+}
+.coreInputMsg {
+    position: relative;
+}
+.imageSectionPostMessage{
+    position: absolute;
+    right: -100px;
+    top: 0px;
+    display: flex;
+    align-items: center;
+}
+.inputImageSetting{
+    display: flex;
+    flex-direction: column;
+}
+.imageSectionPostMessage img{
+    width: 70px;
+}
+
+@media only screen and (max-width: 768px) {
+    .messageInput{
+        width: 160px;
+    }
+    .imageSectionPostMessage img{
+    display: none;
+    }
+    .imageSectionPostMessage{
+        height: 60px;
+        justify-content: center;
+        right: -20px;
+
+    }
+}

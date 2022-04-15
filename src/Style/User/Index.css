@@ -1,0 +1,19 @@
+.mainDivUserPage{
+    display: flex;
+    flex-direction: column;
+}
+.infoDateUser{
+    align-self: flex-end;
+    margin-right: 15px;
+}
+.selectInfoPostUser{
+    display: flex;
+}
+.selectInfoPostUser p{
+    margin: 5px;
+    margin-top: 0px;
+    text-align: center;
+}
+.listPostUser{
+    border: 1px solid black;
+}

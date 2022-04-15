@@ -1,0 +1,11 @@
+.sectionMessage {
+    flex: 1;
+}
+.infoMessage h2{
+    font-size: 35px;
+    margin-bottom: 50px;}
+.listMsg{
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

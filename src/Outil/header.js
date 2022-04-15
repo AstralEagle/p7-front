@@ -1,5 +1,5 @@
 exports.loged = (method, body, notJSON) => {
-    var header = {
+    return {
         method: method,
         headers: notJSON ?
             {
@@ -18,11 +18,10 @@ exports.loged = (method, body, notJSON) => {
                     localStorage.getItem("userID"),
             },
         body: body ?
-            notJSON?
-            body : JSON.stringify(body) 
-            : undefined
+            (notJSON?
+            (body) : (JSON.stringify(body))
+            ): (undefined)
     }
-    return header;
 }
 exports.disconnected = (value) => {
     return {
