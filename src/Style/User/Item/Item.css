@@ -1,0 +1,38 @@
+.itemOfUser{
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 10px;
+    display: flex;
+    height: 60px;
+}
+.itemOfUser:hover{
+    background-color: rgb(163, 163, 163);
+}
+.infoNameAndMoreUser{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-width: 120px;
+}
+
+.infoNameAndMoreUser p{
+    margin: 0px;
+}
+.postName{
+    text-overflow: ellipsis;
+    font-weight: bold;
+    text-align: center;
+}
+.infoPostUser{
+    display: flex;
+    justify-content: space-evenly;
+}
+.postDesc{
+    display: flex;
+    flex: 1;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+.postOneLinePost{
+    padding-right: 4px;
+}

@@ -19,8 +19,12 @@ export default function IndexAdmin() {
   const [nbrRep, setNbrRep] = useState(2);
 
   const resizeDiv = () => {
-    refDivMain.current.style.height = parseInt(window.innerHeight) - 170 + 'px'
-  }
+    if(parseInt(window.innerWidth) > 768)
+      refDivMain.current.style.height = parseInt(window.innerHeight) - 170 + 'px'
+    else
+     refDivMain.current.style.height = parseInt(window.innerHeight) - 230 + 'px'
+
+    }
 
   useEffect(() => {
     resizeDiv();

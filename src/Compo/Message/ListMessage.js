@@ -62,7 +62,7 @@ export default function Listmessages({ channel }) {
       sizeRef.current.style.height = parseInt(window.innerHeight) - 320 + "px";
     }
     else{
-      sizeRef.current.style.height = parseInt(window.innerHeight) - 450 + "px";
+      sizeRef.current.style.height = parseInt(window.innerHeight) - 420 + "px";
     }
   };
 

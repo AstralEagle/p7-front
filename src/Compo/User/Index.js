@@ -22,7 +22,7 @@ export default function Index({ myUser }) {
     if (parseInt(window.innerWidth) > 768)
       resizeRef.current.style.height = parseInt(window.innerHeight) - 250 + "px";
     else
-      resizeRef.current.style.height = parseInt(window.innerHeight) - 70 + "px";
+      resizeRef.current.style.height = parseInt(window.innerHeight) - 300 + "px";
   };
 
   const getUser = () => {

@@ -52,7 +52,7 @@ export default function Signup(){
   return (
     <form action="#" onSubmit={handleSubmit} className="formLog">
       <EmailInput />
-      <div className="row">
+      <div className="rowSign">
         <TextInput valueInput={"name"} nameInput={"Prénom"} />
         <TextInput valueInput={"lastName"} nameInput={"Nom"} />
       </div>

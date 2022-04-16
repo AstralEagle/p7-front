@@ -13,9 +13,12 @@
 }
 .itemChannel p {
     font-size: 20px;
+    width: 50px;
+    text-align: center;
 }
 .addChannel{
     font-size: 40px;
+    width: 50px;
 }
 .settingsChannel{
     opacity: 0;
