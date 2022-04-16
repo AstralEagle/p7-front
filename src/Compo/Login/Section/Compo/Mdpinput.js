@@ -1,4 +1,4 @@
-import '../../Style/textInput.css';
+import '../../../../Style/Login/Input/Input.css'
 
 export default function PassWord(){
     return(<div className="champs">

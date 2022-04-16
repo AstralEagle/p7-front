@@ -1,0 +1,26 @@
+.mainForm{
+    flex: 1;
+    background-color: #FFD7D7;
+    max-width: 40%;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.rowForm{
+    display:flex;
+    justify-content: space-evenly;
+}
+.submitForm{
+    width: 80px;
+    align-self: center;
+    margin-top: 10px
+}
+
+@media only screen and (max-width: 1024px) {
+    .mainForm{
+        flex: 0;
+        padding: 40px;
+    }
+}

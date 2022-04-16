@@ -1,0 +1,8 @@
+.champs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.champs input{
+    width: 80%;
+}

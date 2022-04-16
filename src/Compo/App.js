@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Login from "./Form/Log";
+import Login from "./Login/Index";
 import Index from "./Index/Index";
 import PostPage from "./Post/Page/Index";
 import Banner from "./Banner/Banner";

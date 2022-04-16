@@ -1,0 +1,11 @@
+.divLog{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+@media only screen and (max-width: 1024px) {
+    .divLog{
+        flex-direction: column;
+    }
+}
