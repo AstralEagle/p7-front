@@ -47,6 +47,7 @@ export default function Signup(){
 
   return (
     <form action="#" onSubmit={handleSubmit} className="mainForm">
+      <h3>Inscription</h3>
       <EmailInput />
       <div className="rowForm">
         <TextInput valueInput={"name"} nameInput={"Prénom"} />

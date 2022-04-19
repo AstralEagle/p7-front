@@ -12,16 +12,21 @@ export default function Messages({ setChannel, getAllChan, channels }) {
   const sizeRef = useRef();
 
   const resizeDiv = () => {
-    if(parseInt(window.innerWidth) > 768)
-      sizeRef.current.style.height = parseInt(window.innerHeight) - 80 + "px";
-      else
-      sizeRef.current.style.height = '80px';
+    if(visiChannel){
+      if(parseInt(window.innerWidth) > 768){
+        sizeRef.current.style.height = parseInt(window.innerHeight) - 80 + "px";
+      }
+      else{
+        sizeRef.current.style.height = '80px';
+      }
+    }
 
   }
 
   useEffect(() => {
     getAllChan();
     resizeDiv();
+    window.addEventListener("resize", resizeDiv);
   }, []);
 
   const onActivFalse = (e) => {

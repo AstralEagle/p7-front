@@ -18,6 +18,7 @@ export default function Log(){
 
     useEffect(() => {
         mainResize();
+        if(!localStorage.getItem('userID'))
         window.addEventListener('resize',mainResize);
     },[])
 

@@ -5,51 +5,71 @@
   align-items: center;
 }
 .replyMsg {
+    max-width: 80%;
+    
   display: flex;
+  position: relative;
   height: 30px;
   align-items: center;
+  justify-content: center;
+  margin: 0px;
+  padding-right: 20px;
 }
-.messageInput{
-    height: 20px;
-    width: 280px;
-    margin-bottom: 15px;
+.textReply{
+    overflow: hidden;
+    max-width: 600px;
+    width: 80%;
+    font-size: 12px;
+    text-overflow: ellipsis;
+
 }
-.errorMsg{
-    height: 20px;
-    margin: 0px;
+.removeReply{
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 20px;
+}
+.messageInput {
+  height: 20px;
+  width: 280px;
+  margin-bottom: 15px;
+}
+.errorMsg {
+  height: 20px;
+  margin: 0px;
 }
 .imageInput {
-    display: none;
+  display: none;
 }
 .coreInputMsg {
-    position: relative;
+  position: relative;
 }
-.imageSectionPostMessage{
-    position: absolute;
-    right: -100px;
-    top: 0px;
-    display: flex;
-    align-items: center;
+.imageSectionPostMessage {
+  position: absolute;
+  right: -100px;
+  top: 0px;
+  display: flex;
+  align-items: center;
 }
-.inputImageSetting{
-    display: flex;
-    flex-direction: column;
+.inputImageSetting {
+  display: flex;
+  flex-direction: column;
 }
-.imageSectionPostMessage img{
-    width: 70px;
+.imageSectionPostMessage img {
+  width: 70px;
 }
 
 @media only screen and (max-width: 768px) {
-    .messageInput{
-        width: 160px;
-    }
-    .imageSectionPostMessage img{
+  .messageInput {
+    width: 160px;
+  }
+  .imageSectionPostMessage img {
     display: none;
-    }
-    .imageSectionPostMessage{
-        height: 60px;
-        justify-content: center;
-        right: -20px;
-
-    }
+  }
+  .imageSectionPostMessage {
+    height: 60px;
+    justify-content: center;
+    right: -20px;
+  }
 }

@@ -35,6 +35,7 @@ export default function Login(){
 
     return(
         <form action="#" onSubmit={handleSubmit} className="mainForm">
+            <h3>Connexion</h3>
             <EmailInput />
             <PassInput />
             <input type="submit" className="submitForm"/>

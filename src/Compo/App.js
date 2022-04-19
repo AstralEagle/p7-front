@@ -28,7 +28,6 @@ export default function App() {
     ) {
       const callBack = (res) => {
         setConnect(res);
-        console.log(res)
       };
       Request("auth/", Header.loged("GET"), callBack);
     }

@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 
 import ChannelList from "./BannerChannel";
 import MessageList from './ListMessage';
@@ -9,8 +9,6 @@ import '../../Style/Message/HUB.css';
 
 export default function HUB(){
 
-  const barreRef = useRef();
-  const messagesRef = useRef();
 
   const [channel, setChannelId] = useState({
     name: "Groupomania",
@@ -50,10 +48,10 @@ export default function HUB(){
 
   return (
     <div className="hubMessage">
-      <ChannelList ref={barreRef} setChannel={setChannelId} channels={channels} getAllChan={requestChannel}/>
+      <ChannelList setChannel={setChannelId} channels={channels} getAllChan={requestChannel}/>
       {channel.id === 0 ?
       (<CreateChannel setChannel={setChannelId} getAllChan={requestChannel}/>):
-      (<MessageList channel={channel} ref={messagesRef}/>)
+      (<MessageList channel={channel} />)
     }
     </div>
   );

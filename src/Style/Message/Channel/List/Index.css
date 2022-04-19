@@ -16,8 +16,9 @@
   overflow-y: scroll;
 }
 .infoListChannel{
+  position: absolute;
     top: 0px;
-    right: -40px;
+    right: -20px;
 
 }
 .iconActiv{
@@ -48,5 +49,10 @@
     flex-direction: row;
     overflow-y: hidden;
     overflow-x: scroll;
+  }
+  .infoListChannel{
+    right: 0px;
+    top: auto;
+    bottom: -24px;
   }
 }
