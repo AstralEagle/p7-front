@@ -36,13 +36,16 @@ const MessageReport = forwardRef(({ nbrInit }, ref) => {
   useImperativeHandle(ref, () => {
     return {
       updateReport: (nbrReport) => {
+        nbrInit = nbrReport;
         getReportedMessage(nbrReport);
       },
     };
   });
 
   const forceDelete = (nbrIndex) => {
-    const callBack = () => {};
+    const callBack = () => {
+      getReportedMessage(nbrInit)
+    };
     Request(`admin/message/${nbrIndex}`, Header.loged("DELETE"), callBack);
   };
 

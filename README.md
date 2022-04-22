@@ -1,3 +1,8 @@
-Pour toute utilisation de cette aplication express,
-Merci de créer un fichier .env a la racine du depo avec comme varriable:
+Installation: 
+
+Dans une console ouvert sur la racine du projet tapez:
+-npm i
+-npm start
+
+Puis créer un fichier .env a la racine du projet avvec comme donné:
 REACT_APP_API_URL = {URL de l'api}

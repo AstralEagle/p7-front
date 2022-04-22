@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Member from "./Member";
-import { IoIosCloseCircle } from "react-icons/io";
+import { IoCloseCircle } from "react-icons/io5";
 
 import Request from "../../Outil/request";
 import Header from "../../Outil/header";
@@ -24,6 +24,7 @@ export default function Index() {
   };
 
   useEffect(() => {
+    console.log(window.location)
     getAllAccess();
     getChannel(idChan);
     resizeDiv();
@@ -55,12 +56,12 @@ export default function Index() {
     <div>
       <h2>
         {channel.name}
-        <IoIosCloseCircle className="removeReply" onClick={deletechannel} />
+        <IoCloseCircle className="removeChannel" onClick={deletechannel} />
       </h2>
       <h3>
         Lien :
-        <a href={"http://localhost:3000/join/" + idChan}>
-          {"http://localhost:3000/join/" + idChan}
+        <a href={window.location.origin + "/join/" + idChan}>
+          {window.location.origin + "/join/"  + idChan}
         </a>
       </h3>
       <div className="listUserChan" ref={divRef}>

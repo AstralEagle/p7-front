@@ -1,3 +1,5 @@
+import React, {useState} from 'react'
+
 import PassInput from './Compo/Mdpinput';
 import EmailInput from './Compo/Emailinput';
 
@@ -8,6 +10,8 @@ import '../../../Style/Login/Section/Section.css';
 
 export default function Login(){
 
+    const [errorText, setError] = useState(undefined)
+
     const login = (value) => {
 
         const callBack = (res) => {
@@ -15,8 +19,8 @@ export default function Login(){
             localStorage.setItem("token", res.token);
             window.location = "/";
         }
-        const errorBack = () => {
-        
+        const errorBack = (res) => {
+            setError(res.error)
         }
         
         Request('auth/login',Header.disconnected(value),callBack,errorBack);
@@ -36,6 +40,7 @@ export default function Login(){
     return(
         <form action="#" onSubmit={handleSubmit} className="mainForm">
             <h3>Connexion</h3>
+            <p className='errorInput'>{errorText}</p>
             <EmailInput />
             <PassInput />
             <input type="submit" className="submitForm"/>

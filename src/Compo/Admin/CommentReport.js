@@ -17,6 +17,7 @@ const ListComment = forwardRef(({ nbrInit }, ref) => {
   useImperativeHandle(ref, () => {
     return {
       updateReport: (nbrReport) => {
+        nbrInit = nbrReport;
         getReportedMessage(nbrReport);
       },
     };
@@ -42,7 +43,9 @@ const ListComment = forwardRef(({ nbrInit }, ref) => {
   };
 
   const forceDeleteComment = (id) => {
-    const callBack = (res) => {};
+    const callBack = (res) => {
+      getReportedMessage(nbrInit)
+    };
     Request(`admin/comment/${id}`, Header.loged("DELETE"), callBack);
   };
 

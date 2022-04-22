@@ -17,6 +17,7 @@ const ReportPost = forwardRef(({ nbrInit }, ref) => {
   useImperativeHandle(ref, () => {
     return {
       updateReport: (nbrReport) => {
+        nbrInit = nbrReport;
         getReportedMessage(nbrReport);
       },
     };
@@ -42,7 +43,9 @@ const ReportPost = forwardRef(({ nbrInit }, ref) => {
   };
 
   const forceDelete = (id) => {
-    const callBack = (res) => {};
+    const callBack = (res) => {
+      getReportedMessage(nbrInit)
+    };
     Request(`admin/post/${id}`, Header.loged("DELETE"), callBack);
   };
 
@@ -57,7 +60,7 @@ const ReportPost = forwardRef(({ nbrInit }, ref) => {
               {message.description} : {message.nbrReport}
             </p>
           </div>
-          <IoCloseCircle onClick={forceDelete} className="deleteReport" />
+          <IoCloseCircle onClick={() => forceDelete(message.id)} className="deleteReport" />
         </div>
       ))}
     </div>

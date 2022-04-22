@@ -1,36 +1,37 @@
-import TextInput from './Compo/Textinput';
-import EmailInput from './Compo/Emailinput';
-import PassInput from './Compo/Mdpinput';
+import React, { useState } from "react";
 
-import Request from '../../../Outil/request'
-import Header from '../../../Outil/header'
+import TextInput from "./Compo/Textinput";
+import EmailInput from "./Compo/Emailinput";
+import PassInput from "./Compo/Mdpinput";
 
-import '../../../Style/Login/Section/Section.css'
+import Request from "../../../Outil/request";
+import Header from "../../../Outil/header";
 
-export default function Signup(){
+import "../../../Style/Login/Section/Section.css";
 
+export default function Signup() {
+  const [errorText, setError] = useState(undefined);
 
-    const login = (value) => {
-    
+  const login = (value) => {
     const callBack = (res) => {
-        localStorage.setItem("userID", res.userID);
-        localStorage.setItem("token", res.token);
-        window.location = "/";
-    }
-    Request('auth/login',Header.disconnected(value),callBack);
-    }
+      localStorage.setItem("userID", res.userID);
+      localStorage.setItem("token", res.token);
+      window.location = "/";
+    };
 
-    const signUp = (value) => {
+    Request("auth/login", Header.disconnected(value), callBack);
+  };
 
-        const callBack = () => {
-            login(value);
-        }
-        const errorBack = () => {
-        }
-    
-        Request('auth/signup',Header.disconnected(value),callBack,errorBack);
-        
-    }
+  const signUp = (value) => {
+    const callBack = () => {
+      login(value);
+    };
+    const errorBack = (res) => {
+      setError(res.error);
+    };
+
+    Request("auth/signup", Header.disconnected(value), callBack, errorBack);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,6 +49,7 @@ export default function Signup(){
   return (
     <form action="#" onSubmit={handleSubmit} className="mainForm">
       <h3>Inscription</h3>
+      <p className="errorInput">{errorText}</p>
       <EmailInput />
       <div className="rowForm">
         <TextInput valueInput={"name"} nameInput={"Prénom"} />
@@ -58,4 +60,3 @@ export default function Signup(){
     </form>
   );
 }
-
